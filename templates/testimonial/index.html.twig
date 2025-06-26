@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis
+{% endblock %}
+
+{% block body %}
+	<!--==============================
+		    Breadcumb
+		============================== -->
+	<div
+		class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
+		<!-- bg animated image/ -->
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="breadcumb-content">
+						<h1 class="breadcumb-title">Avis</h1>
+						<ul class="breadcumb-menu">
+							<li>
+								<a href="home-child-care.html">ACCUEIL</a>
+							</li>
+							<li class="active">AVIS</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!--==============================
+    Testimonial Area
+==============================-->
+<div class="testiomonial-area-5 space" data-bg-src="{{ asset('assets/img/testimonial/testi_bg3.png') }}">
+	<div class="container">
+		<div class="title-area text-center">
+			<span class="sub-title">
+				<span class="double-line"></span>
+				AVIS</span>
+			<h2 class="sec-title">Retour Client</h2>
+		</div>
+		<div class="row gy-25">
+			{% for testimonial in testimonials %}
+				<div class="col-xl-4 col-md-6">
+					<div class="testi-box3 bg-gray">
+						<div class="quote-icon">
+							<img src="{{ asset('assets/img/testimonial/quote-icon2.svg') }}" alt="quote">
+						</div>
+
+						<!-- Étoiles dynamiques -->
+						<div class="rating-select d-flex align-items-center mb-2">
+							<p class="stars selected mb-0">
+								<span>
+									{% for i in 1..5 %}
+										{% if i <= testimonial.rating %}
+											<i class="fas fa-star text-warning"></i>
+										{% else %}
+											<i class="far fa-star text-muted"></i>
+										{% endif %}
+									{% endfor %}
+								</span>
+							</p>
+							<label class="ms-2">({{ testimonial.rating }}/5)</label>
+						</div>
+
+						<p class="testi_content">{{ testimonial.content }}</p>
+
+						<div class="testi-box_profile">
+							<div class="thumb">
+								<img src="{{ asset('assets/img/testimonial/testi-profile-' ~ (loop.index % 6 + 1) ~ '.png') }}" alt="profile">
+							</div>
+							<div class="details">
+								<h4 class="testi-box_name">{{ testimonial.author }}</h4>
+								<span class="testi-box_desig">
+									{{ testimonial.createdAt ? testimonial.createdAt|date('d M Y') : '' }}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<div class="col-12 text-center">
+					<p>Aucun avis trouvé.</p>
+				</div>
+			{% endfor %}
+		</div>
+
+		<!-- Pagination -->
+		<div class="text-center mt-4">
+			{{ knp_pagination_render(testimonials) }}
+		</div>
+
+		<!--==============================
+				    Review Form Area
+				==============================-->
+		<!--==============================
+				    Review Area
+				==============================-->
+		<section class="space-bottom">
+			<div class="review-thumb shape-mockup d-none d-md-block" data-top="0" data-left="0">
+				<img src="{{ asset('assets/img/normal/stars.png') }}" alt="review">
+			</div>
+			<div class="container">
+				<div class="row gx-0 bg-gray">
+					<div class="offset-xl-5 col-xl-7 review-form-wrap">
+						<div class="title-area mb-40">
+							<h2 class="sec-title">Laissez Votre Avis</h2>
+							<div class="form-group rating-select d-flex align-items-center">
+								<p class="stars selected">
+									<span>
+										<a class="star-1" href="#">1</a>
+										<a class="star-2" href="#">2</a>
+										<a class="star-3" href="#">3</a>
+										<a class="star-4" href="#">4</a>
+										<a class="star-5 active" href="#">5</a>
+									</span>
+								</p>
+								<label>(5 Stars)</label>
+							</div>
+						</div>
+						{{ form_start(form, {
+                            'attr': {
+                            'class': 'review-form',
+                            }
+                        }) }}
+						<div class="row gx-24">
+							<div class="form-group style-white2 col-md-6">
+								<input type="text" class="form-control" name="name" id="name" placeholder="Enter Votre Nom">
+								<i class="fal fa-user"></i>
+							</div>
+							<div class="form-group style-white2 col-md-6">
+								<input type="email" class="form-control" name="email" id="email" placeholder="Entrez Votre Mail">
+								<i class="fal fa-envelope"></i>
+							</div>
+							<div class="form-group col-md-6">
+								<select name="subject" id="subject" class="form-select style-white2">
+									<option value="" disabled selected hidden>Sélectionner votre service</option>
+									<option value="Diagnostic Électronique">Diagnostic Électronique</option>
+									<option value="Carrosserie">Carrosserie</option>
+									<option value="Diagnostic & Réparation moteur">Diagnostic & Réparation moteur</option>
+									<option value="Frein & Pneumatique">Frein & Pneumatique</option>
+									<option value="Entretien">Entretien</option>
+								</select>
+							</div>
+							<div class="form-group style-white2 col-12">
+								<textarea name="message" id="message" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
+								<i class="fal fa-comment"></i>
+							</div>
+							<div class="form-btn col-12 mt-10">
+								<button class="as-btn style4">Envoyez</button>
+							</div>
+						</div>
+						<p class="form-messages mb-0 mt-3"></p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

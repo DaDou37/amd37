@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Testimonial
+{% endblock %}
+
+{% block body %}
+	<section class="space-bottom">
+		<div class="container">
+			<div class="row gx-0 bg-gray">
+				<div class="offset-xl-5 col-xl-7 review-form-wrap">
+					<div class="title-area mb-40">
+						<h2 class="sec-title">Laissez votre avis</h2>
+					</div>
+
+					{{ form_start(form, {'attr': {'class': 'review-form'}}) }}
+					<div class="row gx-24">
+						<div class="form-group style-white2 col-md-6">
+							{{ form_row(form.author) }}
+						</div>
+						<div class="form-group style-white2 col-md-6">
+							{{ form_row(form.email) }}
+						</div>
+						<div class="form-group col-md-6">
+							{{ form_row(form.subject) }}
+						</div>
+						<div class="form-group col-md-6">
+							{{ form_row(form.rating) }}
+						</div>
+						<div class="form-group style-white2 col-12">
+							{{ form_row(form.content) }}
+						</div>
+						<div class="form-btn col-12 mt-10">
+							<button class="as-btn style4">Envoyez</button>
+						</div>
+					</div>
+					{{ form_end(form) }}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

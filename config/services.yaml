@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    contact.to_email: '%env(CONTACT_TO_EMAIL)%'
+    recaptcha_site_key: '%env(RECAPTCHA_SITE_KEY)%'
+
 
 services:
     # default configuration for services in *this* file
@@ -15,6 +18,13 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\ContactMailer:
+        arguments:
+            $toEmail: '%contact.to_email%'
