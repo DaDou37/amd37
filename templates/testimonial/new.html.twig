@@ -2,6 +2,30 @@
 
 {% block title %}New Testimonial
 {% endblock %}
+{% block javascripts %}
+{% if karser_recaptcha3_site_key is defined %}
+<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form[name="avis_form"]');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
+                const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
+                if (recaptchaInput) {
+                    recaptchaInput.value = token;
+                }
+                form.submit();  
+            });
+        });
+    });
+});
+</script>
+{% endif %}
+
+{% endblock %}
 
 {% block body %}
 	<section class="space-bottom">
@@ -11,9 +35,12 @@
 					<div class="title-area mb-40">
 						<h2 class="sec-title">Laissez votre avis</h2>
 					</div>
+					{{ form_start(form, {'attr': {'class': 'review-form'}, 'name': 'avis_form'}) }}
 
-					{{ form_start(form, {'attr': {'class': 'review-form'}}) }}
 					<div class="row gx-24">
+					                    <div class="form-group" style="display:none;">
+                        {{ form_row(form.captcha) }}
+                    </div>
 						<div class="form-group style-white2 col-md-6">
 							{{ form_row(form.author) }}
 						</div>
@@ -23,18 +50,15 @@
 						<div class="form-group col-md-6">
 							{{ form_row(form.subject) }}
 						</div>
-						<div class="form-group col-md-6">
-							{{ form_row(form.rating) }}
-						</div>
+
 						<div class="form-group style-white2 col-12">
 							{{ form_row(form.content) }}
 						</div>
 						<div class="form-btn col-12 mt-10">
-							<button class="as-btn style4">Envoyez</button>
+							<button class="as-btn style4" type="submit">Envoyez</button>
 						</div>
 					</div>
 					{{ form_end(form) }}
-
 				</div>
 			</div>
 		</div>

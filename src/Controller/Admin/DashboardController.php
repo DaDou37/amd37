@@ -1,14 +1,16 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Entity\Contact;
 use App\Entity\Testimonial;
 use Symfony\Component\HttpFoundation\Response;
+use App\Controller\Admin\TestimonialCrudController;
+use App\Entity\Project;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use App\Controller\Admin\TestimonialCrudController;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -16,7 +18,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
 
-     return parent::index();
+     return $this->render('admin/dashboard.html.twig');
      
     }
 
@@ -28,6 +30,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Témoignages', 'fas fa-comment', Testimonial::class);
+        yield MenuItem::linkToCrud('Avis', 'fas fa-comment', Testimonial::class);
+        yield MenuItem::linkToCrud('Contacts', 'fas fa-envelope', Contact::class);
+        yield MenuItem::linkToCrud('Project', 'fas fa-envelope', Project::class);
     }
 }

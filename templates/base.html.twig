@@ -1,12 +1,11 @@
-
 <!doctype html>
 <html class="no-js" lang="zxx">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title>
-			{% block title %} 
-                AMD37
+			{% block title %}
+				AMD37
 			{% endblock %}
 		</title>
 		<meta name="author" content="Themeholy">
@@ -24,6 +23,8 @@
 		<meta
 		name="theme-color" content="#ffffff">
 
+
+
 		{# Google Fonts #}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link
@@ -34,8 +35,7 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/slick.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> 
-        {% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> {% block stylesheets %}{% endblock %}
 		</head>
 
 		<body>
@@ -81,13 +81,13 @@
 					<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
 				</svg>
 			</div>
-            {% include 'partials/header.html.twig' %}
+			{% include 'partials/header.html.twig' %}
 
 			{# Contenu de la page #}
 			{% block body %}{% endblock %}
 
-            {% include 'partials/footer.html.twig' %}
-			
+			{% include 'partials/footer.html.twig' %}
+
 			{# JavaScript #}
 			<script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
 			<script src="{{ asset('assets/js/slick.min.js') }}"></script>

@@ -32,6 +32,10 @@ class Project
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ProjectType $type = null;
+
     /**
      * @var Collection<int, Gallery>
      */
@@ -46,6 +50,10 @@ class Project
 
     #[ORM\Column]
     private ?bool $isOnline = null;
+
+    #[ORM\ManyToOne(inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ProjectCategory $projectCategory = null;
 
     public function __construct()
     {
@@ -179,6 +187,30 @@ class Project
     public function setIsOnline(bool $isOnline): static
     {
         $this->isOnline = $isOnline;
+
+        return $this;
+    }
+
+    public function getType(): ?ProjectType
+    {
+        return $this->type;
+    }
+
+    public function setType(?ProjectType $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getProjectCategory(): ?ProjectCategory
+    {
+        return $this->projectCategory;
+    }
+
+    public function setProjectCategory(?ProjectCategory $projectCategory): static
+    {
+        $this->projectCategory = $projectCategory;
 
         return $this;
     }

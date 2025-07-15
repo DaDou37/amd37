@@ -43,15 +43,15 @@ class ServiceFixtures extends Fixture
 
         $iconMapping = [
             'Changement de pneus' => 'service_icon_1_3.svg',
-            'Équilibrage des roues' => 'service_icon_1_3.svg',
-            'Réparation moteur' => 'service_icon_1_1.svg',
-            'Diagnostic moteur' => 'service_icon_1_1.svg',
+            'Équilibrage des roues' => 'service_icon_1_13.svg',
+            'Réparation moteur' => 'service_icon_1_12.svg',
+            'Diagnostic moteur' => 'service_icon_1_12.svg',
             'Réglage frein' => 'service_icon_1_2.svg',
             'Changement plaquettes' => 'service_icon_1_2.svg',
-            'Vidange moteur' => 'service_icon_1_4.svg',
-            'Remplacement de courroie' => 'service_icon_1_5.svg',
-            'Pré-contrôle technique' => 'service_icon_1_7.svg',
-            'Diagnostic électronique' => 'service_icon_1_7.svg',
+            'Vidange moteur' => 'service_icon_1_1.svg',
+            'Remplacement de courroie' => 'service_icon_1_1.svg',
+            'Pré-contrôle technique' => 'service_icon_1_11.svg',
+            'Diagnostic électronique' => 'service_icon_1_4.svg',
         ];
 
         $position = 1;

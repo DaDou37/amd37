@@ -17,7 +17,7 @@ class TestimonialFixture extends Fixture
             $testimonial = new Testimonial();
             $testimonial->setAuthor($faker->name());
             $testimonial->setContent($faker->paragraph());
-            $testimonial->setRating(mt_rand(1, 5));
+            
             $testimonial->setCreatedAt(new \DateTimeImmutable($faker->dateTimeBetween('-6 months', 'now')->format('Y-m-d H:i:s')));
 
             $manager->persist($testimonial);

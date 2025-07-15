@@ -1,43 +1,111 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project index{% endblock %}
+{% block title %}Project index
+{% endblock %}
 
 {% block body %}
-    <h1>Project index</h1>
+	<!--==============================
+		    Breadcumb
+		============================== -->
+	<div
+		class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
+		<!-- bg animated image/ -->
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="breadcumb-content">
+						<h1 class="breadcumb-title">Projet</h1>
+						<ul class="breadcumb-menu">
+							<li>
+								<a href="/">ACCUEIL</a>
+							</li>
+							<li class="active">PROJET</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>CreatedAt</th>
-                <th>Picture</th>
-                <th>Slug</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.title }}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ project.picture }}</td>
-                <td>{{ project.slug }}</td>
-                <td>
-                    <a href="{{ path('app_project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<!--==============================
+		    Service Area 02 
+		==============================-->
+	<div class="service-area-2 space">
+		<div class="container">
+			<div class="row gy-25">
 
-    <a href="{{ path('app_project_new') }}">Create new</a>
+				{% for category in categories %}
+					<div class="col-lg-4 col-md-6">
+						<div class="service-card style3">
+							<div class="thumb">
+								<img src="{{ asset(category.image) }}" alt="{{ category.name }}">
+							</div>
+							<div class="card-details">
+								<div class="bg-shadow-icon">
+									<img src="assets/img/service/service-icon-1-{% if loop.index == 2 %}4{% else %}{{ loop.index }}{% endif %}.svg" alt="icon {{ loop.index }}">
+								</div>
+								<div class="service-card_icon">
+									<img src="assets/img/service/service-page-icon-{% if loop.index == 2 %}4{% else %}{{ loop.index }}{% endif %}.svg" alt="page icon {{ loop.index }}">
+								</div>
+								<h3 class="service-card_title h4">
+									<a href="{{ path('app_project_by_category', {'slug': category.slug}) }}">
+										{{ category.name }}
+									</a>
+								</h3>
+								<p class="service-card_text">{{ category.description }}</p>
+								<a class="line-btn" href="{{ path('app_project_by_category', {slug: category.slug}) }}">
+                                VOIR LA RUBRIQUE
+                                </a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
+
+	<!--==============================
+		    Brand Area  
+		==============================-->
+	<div class="client-sec1 space-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="title-area text-center">
+						<h2 class="client-title h4 mb-0">
+							<span class="double-line"></span>
+							WE HAVE TRUSTED MORE THEN
+							<span class="text-theme">20K+</span>GLOBAL CLIENTS</h2>
+					</div>
+				</div>
+			</div>
+			<div class="client-box-border">
+				<div class="row as-carousel" id="brandSlide1" data-slide-show="5" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="false">
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_1.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_2.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_3.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_1.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_4.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_2.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/client_1_3.png" alt="Client Logo">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

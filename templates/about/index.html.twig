@@ -193,20 +193,7 @@
 							<img src="{{ asset('assets/img/testimonial/quote-icon2.svg') }}" alt="quote">
 						</div>
 						<!-- Étoiles dynamiques -->
-						<div class="rating-select d-flex align-items-center mb-2">
-							<p class="stars selected mb-0">
-								<span>
-									{% for i in 1..5 %}
-										{% if i <= testimonial.rating %}
-											<i class="fas fa-star text-warning"></i>
-										{% else %}
-											<i class="far fa-star text-muted"></i>
-										{% endif %}
-									{% endfor %}
-								</span>
-							</p>
-							<label class="ms-2">({{ testimonial.rating }}/5)</label>
-						</div>
+
 						<p class="testi_content">{{ testimonial.content }}</p>
 						<div class="testi-box_profile">
 							<div class="details">

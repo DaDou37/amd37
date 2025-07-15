@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[Route('/contact')]
 final class ContactController extends AbstractController
@@ -20,7 +21,8 @@ public function index(
     Request $request,
     EntityManagerInterface $entityManager,
     ContactRepository $contactRepository,
-    ContactMailer $contactMailer
+    ContactMailer $contactMailer,
+    ParameterBagInterface $params
 ): Response {
     $contact = new Contact();
     $form = $this->createForm(ContactForm::class, $contact, [
@@ -42,7 +44,8 @@ public function index(
     return $this->render('contact/index.html.twig', [
         'contacts' => $contactRepository->findAll(),
         'form' => $form->createView(),
-        'recaptcha_site_key' => $this->getParameter('recaptcha_site_key'),
+        'karser_recaptcha3_site_key' => $params->get('recaptcha_site_key'),
+'karser_recaptcha3_enabled' => true, // si tu veux le forcer ici
     ]);
 }
 

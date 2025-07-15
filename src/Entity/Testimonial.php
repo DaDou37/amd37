@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TestimonialRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TestimonialRepository::class)]
 class Testimonial
@@ -15,22 +16,47 @@ class Testimonial
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Le nom ne peut pas dépasser {{ limit }} caractères'
+    )]
     private ?string $author = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le message est obligatoire')]
+    #[Assert\Length(
+        min: 5,
+        max: 2000,
+        minMessage: 'Le message doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Le message ne peut pas dépasser {{ limit }} caractères'
+    )]
     private ?string $content = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $rating = null;
-
     #[ORM\Column(type: 'boolean')]
     private bool $isApproved = false;
 
+    #[ORM\Column(length: 180, nullable: true)]
+    #[Assert\Email(message: 'Adresse email invalide')]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le sujet ne peut pas dépasser {{ limit }} caractères'
+    )]
+    private ?string $subject = null;
+
     #[ORM\ManyToOne(inversedBy: 'testimonials')]
     private ?User $user = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -73,14 +99,38 @@ class Testimonial
         return $this;
     }
 
-    public function getRating(): ?int
+    public function isApproved(): bool
     {
-        return $this->rating;
+        return $this->isApproved;
     }
 
-    public function setRating(?int $rating): static
+    public function setIsApproved(bool $isApproved): static
     {
-        $this->rating = $rating;
+        $this->isApproved = $isApproved;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(?string $subject): static
+    {
+        $this->subject = $subject;
 
         return $this;
     }
@@ -96,14 +146,9 @@ class Testimonial
 
         return $this;
     }
-    public function isApproved(): bool
-    {
-        return $this->isApproved;
-    }
 
-    public function setIsApproved(bool $isApproved): static
+    public function __toString(): string
     {
-        $this->isApproved = $isApproved;
-        return $this;
+        return $this->author;
     }
 }

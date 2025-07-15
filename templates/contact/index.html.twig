@@ -1,6 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact index{% endblock %}
+{% block title %}Contact{% endblock %}
+
+{% block javascripts %}
+    {% if karser_recaptcha3_site_key is defined %}
+<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form[name="contact_form"]');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            grecaptcha.ready(function () {
+                grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'contact'}).then(function (token) {
+                    const recaptchaInput = document.querySelector('input[name="contact_form[captcha]"]');
+                    if (recaptchaInput) {
+                        recaptchaInput.value = token;
+                    }
+                    form.submit();  
+                });
+            });
+        });
+    });
+</script>
+
+    {% endif %}
+{% endblock %}
+
+
+
+
 
 {% block body %}
     <!--==============================
@@ -14,7 +43,7 @@
                 <div class="breadcumb-content">
                     <h1 class="breadcumb-title">Contact</h1>
                     <ul class="breadcumb-menu">
-                        <li><a href="/">ACCEUIL</a></li>
+                        <li><a href="/">ACCUEIL</a></li>
                         <li class="active">CONTACT</li>
                     </ul>
                 </div>
@@ -91,7 +120,8 @@ Service Area
                 {% endfor %}
 
                 {{ form_start(form, {
-                    attr: { class: 'review-form' }
+                    attr: { class: 'review-form' },
+                    name: 'contact_form'
                 }) }}
                 <div class="row gx-24">
                     <div class="form-group style-white2 col-md-6">
@@ -134,13 +164,5 @@ Appointment Area
     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2703.5321695691944!2d0.6948993892388788!3d47.24349006757399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1719178260000!5m2!1sfr!2sfr"  allowfullscreen="" loading="lazy"></iframe>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
-<script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute('{{ recaptcha_site_key }}', {action: 'contact'}).then(function(token) {
-            
-            document.getElementById('contact_captcha').value = token;
-        });
-    });
-</script>
+
 {% endblock %}
