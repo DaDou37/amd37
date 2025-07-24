@@ -10,7 +10,7 @@ security:
             memory:
                 users:
                     admin:
-                        password: '$2y$13$2516YHa6ghtkvPJpLI5DF.n5s/y8xMXBvEwd34tiJMm8XUJMOFAtC' # davidhugo
+                        password: '$2y$13$2516YHa6ghtkvPJpLI5DF.n5s/y8xMXBvEwd34tiJMm8XUJMOFAtC'
                         roles: ['ROLE_ADMIN']
     firewalls:
         dev:

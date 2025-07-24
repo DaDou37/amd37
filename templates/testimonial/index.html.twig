@@ -3,33 +3,33 @@
 {% block title %}Avis
 {% endblock %}
 {% block javascripts %}
-{% if karser_recaptcha3_site_key is defined %}
-<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form[name="avis_form"]');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        
-        grecaptcha.ready(function () {
-            grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
-                const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
-                if (recaptchaInput) {
-                    recaptchaInput.value = token;
-                }
-                form.submit();  
-            });
-        });
-    });
+	{% if karser_recaptcha3_site_key is defined %}
+		<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const form = document.querySelector('form[name="avis_form"]');
+form.addEventListener('submit', function (e) {
+e.preventDefault();
+
+grecaptcha.ready(function () {
+grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
+const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
+if (recaptchaInput) {
+recaptchaInput.value = token;
+}
+form.submit();
 });
-</script>
-{% endif %}
+});
+});
+});
+		</script>
+	{% endif %}
 {% endblock %}
 
 {% block body %}
 	<!--==============================
-	        Breadcumb
-	    ============================== -->
+		        Breadcumb
+		    ============================== -->
 	<div
 		class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
 		<!-- bg animated image/ -->
@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-
 <!--==============================
     Testimonial Area
 ==============================-->
@@ -72,15 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="quote-icon">
 							<img src="{{ asset('assets/img/testimonial/quote-icon2.svg') }}" alt="quote">
 						</div>
-
-
-
 						<p class="testi_content">{{ testimonial.content }}</p>
-
 						<div class="testi-box_profile">
-							<div class="thumb">
-								<img src="{{ asset('assets/img/testimonial/testi-profile-' ~ (loop.index % 6 + 1) ~ '.png') }}" alt="profile">
-							</div>
 							<div class="details">
 								<h4 class="testi-box_name">{{ testimonial.author }}</h4>
 								<span class="testi-box_desig">
@@ -103,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		</div>
 
 		<!--==============================
-		            Review Form Area
-		        ==============================-->
+				            Review Form Area
+				        ==============================-->
 		<section class="space-bottom">
 			<div class="review-thumb shape-mockup d-none d-md-block" data-top="0" data-left="0">
 				<img src="{{ asset('assets/img/normal/stars.png') }}" alt="review">
@@ -144,19 +136,16 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="form-btn col-12 mt-10">
 								<button type="submit" class="as-btn style4">Envoyez</button>
 							</div>
-							                    <div class="form-group" style="display:none;">
-                        {{ form_row(form.captcha) }}
-                    </div>
+							<div class="form-group" style="display:none;">
+								{{ form_row(form.captcha) }}
+							</div>
 						</div>
 						<p class="form-messages mb-0 mt-3"></p>
 						{{ form_end(form) }}
 					</div>
 				</div>
 			</div>
-			
+
 		</section>
 	</div>
-</div>
-
-
-{% endblock %}
+</div>{% endblock %}
