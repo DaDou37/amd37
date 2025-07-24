@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,14 +24,14 @@ class User
     #[ORM\Column(length: 100)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $role = null;
+    private ?string $role = 'ROLE_USER';
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
@@ -40,33 +42,18 @@ class User
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $updatedAt = null;
 
-    /**
-     * @var Collection<int, Project>
-     */
     #[ORM\OneToMany(targetEntity: Project::class, mappedBy: 'user')]
     private Collection $projects;
 
-    /**
-     * @var Collection<int, Testimonial>
-     */
     #[ORM\OneToMany(targetEntity: Testimonial::class, mappedBy: 'user')]
     private Collection $testimonials;
 
-    /**
-     * @var Collection<int, Gallery>
-     */
     #[ORM\OneToMany(targetEntity: Gallery::class, mappedBy: 'user')]
     private Collection $galleries;
 
-    /**
-     * @var Collection<int, Service>
-     */
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'user')]
     private Collection $services;
 
-    /**
-     * @var Collection<int, Contact>
-     */
     #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'user')]
     private Collection $contacts;
 
@@ -92,7 +79,6 @@ class User
     public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 
@@ -104,7 +90,6 @@ class User
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
         return $this;
     }
 
@@ -116,7 +101,6 @@ class User
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -128,7 +112,6 @@ class User
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -140,8 +123,22 @@ class User
     public function setRole(string $role): static
     {
         $this->role = $role;
-
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return [$this->role ?? 'ROLE_USER'];
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email ?? '';
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Rien à nettoyer ici
     }
 
     public function getPicture(): ?string
@@ -152,7 +149,6 @@ class User
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
-
         return $this;
     }
 
@@ -164,169 +160,94 @@ class User
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
-    public function getupdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setupdatedAt(?\DateTime $updatedAt): static
+    public function setUpdatedAt(?\DateTime $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Project>
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
-    }
+    // Relations setters/getters (pas modifiés ici)
 
-    public function addProject(Project $project): static
-    {
+    public function getProjects(): Collection { return $this->projects; }
+    public function addProject(Project $project): static {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
             $project->setUser($this);
         }
-
         return $this;
     }
-
-    public function removeProject(Project $project): static
-    {
-        if ($this->projects->removeElement($project)) {
-            // set the owning side to null (unless already changed)
-            if ($project->getUser() === $this) {
-                $project->setUser(null);
-            }
+    public function removeProject(Project $project): static {
+        if ($this->projects->removeElement($project) && $project->getUser() === $this) {
+            $project->setUser(null);
         }
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Testimonial>
-     */
-    public function getTestimonials(): Collection
-    {
-        return $this->testimonials;
-    }
-
-    public function addTestimonial(Testimonial $testimonial): static
-    {
+    public function getTestimonials(): Collection { return $this->testimonials; }
+    public function addTestimonial(Testimonial $testimonial): static {
         if (!$this->testimonials->contains($testimonial)) {
             $this->testimonials->add($testimonial);
             $testimonial->setUser($this);
         }
-
         return $this;
     }
-
-    public function removeTestimonial(Testimonial $testimonial): static
-    {
-        if ($this->testimonials->removeElement($testimonial)) {
-            // set the owning side to null (unless already changed)
-            if ($testimonial->getUser() === $this) {
-                $testimonial->setUser(null);
-            }
+    public function removeTestimonial(Testimonial $testimonial): static {
+        if ($this->testimonials->removeElement($testimonial) && $testimonial->getUser() === $this) {
+            $testimonial->setUser(null);
         }
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Gallery>
-     */
-    public function getGalleries(): Collection
-    {
-        return $this->galleries;
-    }
-
-    public function addGallery(Gallery $gallery): static
-    {
+    public function getGalleries(): Collection { return $this->galleries; }
+    public function addGallery(Gallery $gallery): static {
         if (!$this->galleries->contains($gallery)) {
             $this->galleries->add($gallery);
             $gallery->setUser($this);
         }
-
         return $this;
     }
-
-    public function removeGallery(Gallery $gallery): static
-    {
-        if ($this->galleries->removeElement($gallery)) {
-            // set the owning side to null (unless already changed)
-            if ($gallery->getUser() === $this) {
-                $gallery->setUser(null);
-            }
+    public function removeGallery(Gallery $gallery): static {
+        if ($this->galleries->removeElement($gallery) && $gallery->getUser() === $this) {
+            $gallery->setUser(null);
         }
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Service>
-     */
-    public function getServices(): Collection
-    {
-        return $this->services;
-    }
-
-    public function addService(Service $service): static
-    {
+    public function getServices(): Collection { return $this->services; }
+    public function addService(Service $service): static {
         if (!$this->services->contains($service)) {
             $this->services->add($service);
             $service->setUser($this);
         }
-
         return $this;
     }
-
-    public function removeService(Service $service): static
-    {
-        if ($this->services->removeElement($service)) {
-            // set the owning side to null (unless already changed)
-            if ($service->getUser() === $this) {
-                $service->setUser(null);
-            }
+    public function removeService(Service $service): static {
+        if ($this->services->removeElement($service) && $service->getUser() === $this) {
+            $service->setUser(null);
         }
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Contact>
-     */
-    public function getContacts(): Collection
-    {
-        return $this->contacts;
-    }
-
-    public function addContact(Contact $contact): static
-    {
+    public function getContacts(): Collection { return $this->contacts; }
+    public function addContact(Contact $contact): static {
         if (!$this->contacts->contains($contact)) {
             $this->contacts->add($contact);
             $contact->setUser($this);
         }
-
         return $this;
     }
-
-    public function removeContact(Contact $contact): static
-    {
-        if ($this->contacts->removeElement($contact)) {
-            // set the owning side to null (unless already changed)
-            if ($contact->getUser() === $this) {
-                $contact->setUser(null);
-            }
+    public function removeContact(Contact $contact): static {
+        if ($this->contacts->removeElement($contact) && $contact->getUser() === $this) {
+            $contact->setUser(null);
         }
-
         return $this;
     }
 }

@@ -38,6 +38,8 @@ class ServiceFixtures extends Fixture
                 ['Remplacement de courroie', 'Changement de la courroie de distribution.'],
                 ['Pré-contrôle technique', 'Vérification avant présentation au contrôle.'],
                 ['Diagnostic électronique', 'Recherche de pannes via valise OBD.'],
+                ['Hydrolique', 'Réflexion de verrin hydrolique'],
+                ['Réparation sur godet', 'Réflexion de godet'],
             ],
         ];
 

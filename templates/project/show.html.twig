@@ -1,42 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project{% endblock %}
+{% block title %}{{ project.title }}{% endblock %}
 
 {% block body %}
-    <h1>Project</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ project.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ project.description }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ project.picture }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ project.slug }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_project_index') }}">back to list</a>
-
-    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-
-    {{ include('project/_delete_form.html.twig') }}
+    <section class="project-details">
+        <div class="container">
+            <h1>{{ project.title }}</h1>
+            <img src="{{ asset('uploads/projects/' ~ project.picture) }}" alt="{{ project.title }}" style="max-width: 100%;">
+            <p>{{ project.description }}</p>
+            <p><strong>Publié le :</strong> {{ project.createdAt|date('d/m/Y') }}</p>
+        </div>
+    </section>
 {% endblock %}

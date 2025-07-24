@@ -14,6 +14,7 @@ class ProjectCategoryFixtures extends Fixture
             ['name' => 'Véhicule Léger', 'slug' => 'vehicule-leger', 'image' => 'assets/img/service/2cv.jpg'],
             ['name' => 'Engin de Chantier', 'slug' => 'engin-de-chantier', 'image' => 'assets/img/service/mini-pelle.jpg'],
             ['name' => 'Poids Lourd', 'slug' => 'poids-lourd', 'image' => 'assets/img/service/pl.jpg'],
+            ['name' => 'Locomotive', 'slug' => 'locomotive', 'image' => 'assets/img/service/locomotive.jpg'],
         ];
 
         foreach ($categories as $catData) {

@@ -48,7 +48,7 @@
                     <div class="title-area mb-0">
                         <h3 class="sub-title">A PROPOS</h3>
                         <h2 class="sec-title">Atelier de Mécanique à Domicile</h2>
-                        <p class="sec-text">Depuis 2015, AMD37 propose un service de mécanique à domicile pour particuliers et professionnels, en Indre-et-Loire. De l’entretien courant aux interventions sur poids lourds ou engins de chantier, profitez d’un savoir-faire complet, sans vous déplacer</p>
+                        <p class="sec-text">Depuis 2015, AMD37 propose un service de mécanique à domicile pour particuliers et professionnels, en Indre-et-Loire. De l’entretien courant aux interventions sur tout type de vehicule, poids lourds, engins de chantier et locomotive. Profitez d’un savoir-faire complet, sans vous déplacer</p>
                         <p class="sec-text">Réactivité, expertise, mobilité : découvrez notre histoire.</p>
                         <div class="about-wrap-group">
                             <div class="about-card">
@@ -102,7 +102,7 @@
                     <div class="counter-card_icon" data-bg-src="assets/img/counter/icon_bg.svg">
                         <img src="assets/img/counter/counter_icon_3.svg" alt="img">
                     </div>
-                    <h2 class="counter-card_number"><span class="counter-number">2500</span>+</h2>
+                    <h2 class="counter-card_number"><span class="counter-number">3000</span>+</h2>
                     <p class="counter-card_text">Clients satisfait</p>
                 </div>
             </div>
@@ -258,106 +258,60 @@
 <!--==============================
     Portfolio Area  
 ==============================-->
-<section class="portfolio-area space-top" data-overlay="title" data-opacity="9" data-bg-src="assets/img/portfolio/portfolio_bg.png">
-    <!-- bg animated image -->
-    <div class="portfolio-anime-img shape-mockup d-none d-xl-block" data-top="0%" data-left="0"><img class="svg-img" src="assets/img/portfolio/portfolio_bg_shape.svg" alt="img"></div>
-    <!-- bg animated image /-->
+<section class="portfolio-area space-top" data-overlay="title" data-opacity="9" data-bg-src="{{ asset('assets/img/portfolio/outils.jpg') }}">
+    <div class="portfolio-anime-img shape-mockup d-none d-xl-block" data-top="0%" data-left="0">
+        <img class="svg-img" src="{{ asset('assets/img/portfolio/portfolio_bg_shape.svg') }}" alt="img">
+    </div>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="title-area text-center">
-                    <span class="sub-title"><span class="double-line"></span>OUR PROJECTS</span>
-                    <h2 class="sec-title text-white mb-0">Our Best Projects</h2>
+                    <span class="sub-title"><span class="double-line"></span>MES PROJETS</span>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container-fluid p-0">
-        <div class="row portfolio-slider-1 as-carousel" id="portfolio-slider1" data-slide-show="5" data-ml-slide-show="4" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="1" data-xs-slide-show="1" data-dots="false" data-infinite="true">
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_1-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
+        <div class="row portfolio-slider-1 as-carousel"
+             data-slide-show="5" data-ml-slide-show="4" data-lg-slide-show="4"
+             data-md-slide-show="3" data-sm-slide-show="1" data-xs-slide-show="1"
+             data-dots="false" data-infinite="true">
+
+            {% for project in projects %}
+                <div class="col-lg-3">
+                    <div class="portfolio-box">
+                        <img class="portfolio-box_img"
+                             src="{{ asset('assets/img/projects/' ~ project.picture) }}"
+                             alt="{{ project.title }}">
+                        <div class="portfolio-box_details">
+                            <h3 class="portfolio-box_title h4">
+                                <a href="{{ path('app_project_show', { slug: project.slug }) }}">
+                                    {{ project.title }}
+                                </a>
+                            </h3>
+                            {% if project.projectCategory %}
+                                <span class="portfolio-box_subtitle">{{ project.projectCategory.name }}</span>
+                            {% endif %}
+                            <a href="{{ path('app_project_show', { slug: project.slug }) }}" class="icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_2-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
+            {% else %}
+                <div class="col-12 text-center text-white">
+                    <p>Aucun projet à afficher pour le moment.</p>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_3-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>           
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_4-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_1-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_2-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_3-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>          
-            <div class="col-lg-3">
-                <div class="portfolio-box">
-                    <img class="portfolio-box_img" src="assets/img/portfolio/portfolio_4-v2.png" alt="img">
-                    <div class="portfolio-box_details">
-                        <h3 class="portfolio-box_title h4"><a href="project-details.html">Dent Repair Glass</a></h3>
-                        <span class="portfolio-box_subtitle">Repairing solutions</span>
-                        <a href="project-details.html" class="icon"><i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </section>
+
+
+
 <!--==============================
     Testimonial Area 2  
 ==============================-->
@@ -402,44 +356,46 @@
 </section>
 
 
-<!--==============================
-    Brand Area  
-==============================-->
-<div class="client-sec1 space-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="title-area text-center">
-                    <h2 class="client-title h4 mb-0"><span class="double-line"></span> Nos Marques & Partenaires</h2>
-                </div>
-            </div>
-        </div>
-        <div class="client-box-border">
-            <div class="row as-carousel" id="brandSlide1" data-slide-show="5" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="false">
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_1.png" alt="Client Logo">
-                </div>
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_2.png" alt="Client Logo">
-                </div>
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_3.png" alt="Client Logo">
-                </div>
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_1.png" alt="Client Logo">
-                </div>
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_4.png" alt="Client Logo">
-                </div>
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_2.png" alt="Client Logo">
-                </div>
-                <div class="col-auto client-box">
-                    <img src="assets/img/client/client_1_3.png" alt="Client Logo">
-                </div>
-            </div>
-        </div>        
-    </div>
-</div>
+	<!--==============================
+		    Brand Area  
+		==============================-->
+	<div class="client-sec1 space-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="title-area text-center">
+						<h2 class="client-title h4 mb-0">
+							<span class="double-line"></span>
+							NOS MARQUES & PARTENAIRES
+					</div>
+				</div>
+			</div>
+			<div class="client-box-border">
+				<div class="row as-carousel" id="brandSlide1" data-slide-show="5" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="false">
+					<div class="col-auto client-box">
+						<img src="assets/img/client/bv2ii.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/Deutz.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/ebpl.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/Peugeot.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/renault.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/Sarl.png" alt="Client Logo">
+					</div>
+					<div class="col-auto client-box">
+						<img src="assets/img/client/Yanmar.png" alt="Client Logo">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

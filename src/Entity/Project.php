@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -58,6 +59,8 @@ class Project
     public function __construct()
     {
         $this->galleries = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->isOnline = false;
     }
 
     public function getId(): ?int
@@ -214,4 +217,8 @@ class Project
 
         return $this;
     }
+
+
+
+
 }

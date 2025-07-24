@@ -22,11 +22,7 @@ class ProjectType
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Project::class)]
     private Collection $projects;
@@ -61,33 +57,16 @@ class ProjectType
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function __construct()
     {
         $this->projects = new ArrayCollection();
     }
+    
+    public function __toString(): string
+    {
+        return $this->name ?? '';
+    }
+
 
 }

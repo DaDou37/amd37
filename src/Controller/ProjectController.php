@@ -39,5 +39,14 @@ final class ProjectController extends AbstractController
             'category' => $category,
             'projects' => $category->getProjects(),
         ]);
-    }
+    } 
+    
+    #[Route('/{slug}', name: 'app_project_show', methods: ['GET'])]
+public function show(Project $project): Response
+{
+    return $this->render('project/show.html.twig', [
+        'project' => $project,
+    ]);
+}
+
 }
