@@ -7,8 +7,11 @@
 /public/bundles/
 /var/
 /vendor/
-/.env/
+.env
 /security.yaml/
+.env.local
+.env.*.local
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
