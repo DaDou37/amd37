@@ -25,7 +25,6 @@ public function configureFields(string $pageName): iterable
         TextField::new('author'),
         TextField::new('email'),
         TextField::new('subject'),
-        IntegerField::new('rating'),
         TextEditorField::new('content'),
         BooleanField::new('isApproved', 'Approuvé ?'),
         DateTimeField::new('createdAt')->onlyOnIndex(),

@@ -6,6 +6,7 @@ use App\Entity\Testimonial;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\TestimonialCrudController;
 use App\Entity\Project;
+use App\Entity\Service;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -33,5 +34,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Avis', 'fas fa-comment', Testimonial::class);
         yield MenuItem::linkToCrud('Contacts', 'fas fa-envelope', Contact::class);
         yield MenuItem::linkToCrud('Project', 'fas fa-envelope', Project::class);
+        yield MenuItem::linkToCrud('Service', 'fas fa-envelope', Service::class);
     }
 }

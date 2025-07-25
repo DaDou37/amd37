@@ -17,7 +17,6 @@ class ContactCrudController extends AbstractCrudController
     {
         return Contact::class;
     }
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -28,17 +27,18 @@ class ContactCrudController extends AbstractCrudController
             EmailField::new('email', 'Email'),
 
             TextField::new('subject', 'Sujet'),
-                    TextField::new('message', 'Message')
-            ->formatValue(function ($value, $entity) {
-                
-                $max = 50;
-                if (strlen($value) > $max) {
-                    return substr($value, 0, $max) . '...';
-                }
-                return $value;
-            })
-            ->onlyOnIndex(),
 
+            // Pour la liste (index)
+            TextField::new('message', 'Message')
+                ->formatValue(function ($value) {
+                    $max = 50;
+                    return strlen($value) > $max ? substr($value, 0, $max) . '...' : $value;
+                })
+                ->onlyOnIndex(),
+
+            // Pour new/edit/show
+            TextareaField::new('message', 'Message')
+                ->hideOnIndex(),
 
             DateTimeField::new('createdAt', 'Créé le')->onlyOnIndex(),
 

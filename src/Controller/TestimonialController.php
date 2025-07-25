@@ -53,7 +53,7 @@ public function index(
 
     return $this->render('testimonial/index.html.twig', [
         'testimonials' => $testimonials,
-        'form' => $form->createView(), // 👈 C’est cette ligne qui est obligatoire
+        'form' => $form->createView(), 
     ]);
 }
 
@@ -79,70 +79,5 @@ public function index(
         ]);
     }
 
-    #[Route('/new', name: 'app_testimonial_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        $testimonial = new Testimonial();
-        $form = $this->createForm(TestimonialForm::class, $testimonial);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = (string) $form->getErrors(true, false);
-            $this->addFlash('danger', 'Erreur dans le formulaire : ' . $errors);
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($testimonial);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_testimonial_index');
-        }
-
-        return $this->render('testimonial/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_testimonial_show', methods: ['GET'])]
-    public function show(Testimonial $testimonial): Response
-    {
-        return $this->render('testimonial/show.html.twig', [
-            'testimonial' => $testimonial,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_testimonial_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Testimonial $testimonial, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        $form = $this->createForm(TestimonialForm::class, $testimonial);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_testimonial_index');
-        }
-
-        return $this->render('testimonial/edit.html.twig', [
-            'testimonial' => $testimonial,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_testimonial_delete', methods: ['POST'])]
-    public function delete(Request $request, Testimonial $testimonial, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        if ($this->isCsrfTokenValid('delete' . $testimonial->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($testimonial);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_testimonial_index');
-    }
+    
 }

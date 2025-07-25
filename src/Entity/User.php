@@ -174,6 +174,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->email; // ou firstName . ' ' . lastName, selon ce que tu veux afficher
+    }
+
     // Relations setters/getters (pas modifiés ici)
 
     public function getProjects(): Collection { return $this->projects; }

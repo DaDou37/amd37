@@ -20,7 +20,7 @@ class TestimonialForm extends AbstractType
             ->add('author', null, ['label' => 'Nom'])
             ->add('email', null, ['label' => 'Email'])
             ->add('subject', null, ['label' => 'Sujet'])
-            ->add('message', null, ['label' => 'Message'])
+            ->add('content', null, ['label' => 'Message'])
             ->add('createdAt', null, ['label' => 'Date de création', 'widget' => 'single_text'])
             ->add('user', EntityType::class, [
                 'class' => User::class,
