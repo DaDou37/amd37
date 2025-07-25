@@ -54,6 +54,8 @@ class ServiceFixtures extends Fixture
             'Remplacement de courroie' => 'service_icon_1_1.svg',
             'Pré-contrôle technique' => 'service_icon_1_11.svg',
             'Diagnostic électronique' => 'service_icon_1_4.svg',
+            'Hydrolique' => 'service_icon_1_12.svg',
+            'Réparation sur godet' => 'service_icon_1_12.svg',
         ];
 
         $position = 1;
