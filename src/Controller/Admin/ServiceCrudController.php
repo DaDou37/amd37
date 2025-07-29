@@ -40,7 +40,7 @@ class ServiceCrudController extends AbstractCrudController
                 ->setRequired(false)
                 ->onlyOnIndex(), // tu peux aussi mettre `.onlyOnDetail()` si besoin
 
-            AssociationField::new('category', 'Catégorie'),
+            
             
         ];
     }

@@ -8,21 +8,21 @@
 		<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-const form = document.querySelector('form[name="contact_form"]');
-form.addEventListener('submit', function (e) {
-e.preventDefault();
+				const form = document.querySelector('form[name="contact_form"]');
+				form.addEventListener('submit', function (e) {
+					e.preventDefault();
 
-grecaptcha.ready(function () {
-grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'contact'}).then(function (token) {
-const recaptchaInput = document.querySelector('input[name="contact_form[captcha]"]');
-if (recaptchaInput) {
-recaptchaInput.value = token;
-}
-form.submit();
-});
-});
-});
-});
+					grecaptcha.ready(function () {
+						grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'contact'}).then(function (token) {
+							const recaptchaInput = document.querySelector('input[name="contact_form[captcha]"]');
+							if (recaptchaInput) {
+								recaptchaInput.value = token;
+							}
+							form.submit();
+						});
+					});
+				});
+			});
 		</script>
 
 	{% endif %}
@@ -30,12 +30,8 @@ form.submit();
 
 
 {% block body %}
-	<!--==============================
-	    Breadcumb
-	============================== -->
 	<div
 		class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
-		<!-- bg animated image/ -->
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -43,7 +39,7 @@ form.submit();
 						<h1 class="breadcumb-title">Contact</h1>
 						<ul class="breadcumb-menu">
 							<li>
-								<a href="/">ACCUEIL</a>
+								<a href="{{ path('app_home') }}">ACCUEIL</a>
 							</li>
 							<li class="active">CONTACT</li>
 						</ul>
@@ -52,11 +48,7 @@ form.submit();
 			</div>
 		</div>
 	</div>
-</div>
 
-<!--==============================
-Service Area  
-==============================-->
 <section class="space">
 	<div class="container">
 		<div class="row gy-30 justify-content-center">
@@ -79,7 +71,7 @@ Service Area
 					<div class="contact-box_info">
 						<h4 class="contact-box_title">Contact</h4>
 						<a href="mailto:sylvainmestivier@outlook.fr" class="contact-box_link">sylvainmestivier@outlook.fr</a>
-						<a href="tel:0699483005" class="contact-box_link">0699483005</a>
+						<a href="tel:0699483005" class="contact-box_link">06 99 48 30 05</a>
 					</div>
 				</div>
 			</div>
@@ -90,8 +82,8 @@ Service Area
 					</div>
 					<div class="contact-box_info">
 						<h4 class="contact-box_title">Mes Horaires</h4>
-						<p class="contact-box_text">8H - 18H ( Lundi - Vendredi )</p>
-						<p class="contact-box_text">Samedi & Dimanche Fermée</p>
+						<p class="contact-box_text">8h - 18h (Lundi - Vendredi)</p>
+						<p class="contact-box_text">Samedi &amp; Dimanche fermés</p>
 					</div>
 				</div>
 			</div>
@@ -99,9 +91,6 @@ Service Area
 	</div>
 </section>
 
-<!--==============================
-    Contact Area  
-==============================-->
 <div class="contact-area space bg-smoke3 overflow-hidden">
 	<div class="contact-anime-img-1 jump shape-mockup d-none d-xl-block" data-top="0" data-right="0">
 		<img src="{{ asset('assets/img/contact/contact-bg-shape.png') }}" alt="img">
@@ -126,15 +115,15 @@ Service Area
                 }) }}
 				<div class="row gx-24">
 					<div class="form-group style-white2 col-md-6">
-						{{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Entrer Votre Prénom'}}) }}
+						{{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre prénom'}}) }}
 						<i class="fal fa-user"></i>
 					</div>
 					<div class="form-group style-white2 col-md-6">
-						{{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Entrer Votre Nom'}}) }}
+						{{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom'}}) }}
 						<i class="fal fa-user"></i>
 					</div>
 					<div class="form-group style-white2 col-md-6">
-						{{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez Votre Mail'}}) }}
+						{{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mail'}}) }}
 						<i class="fal fa-envelope"></i>
 					</div>
 					<div class="form-group col-md-6">
@@ -145,7 +134,7 @@ Service Area
 						<i class="fal fa-comment"></i>
 					</div>
 					<div class="form-btn col-12 mt-10">
-						<button class="as-btn style4" type="submit">Envoyez</button>
+						<button class="as-btn style4" type="submit">Envoyer</button>
 					</div>
 					<div class="form-group" style="display:none;">
 						{{ form_row(form.captcha) }}
@@ -157,10 +146,7 @@ Service Area
 	</div>
 </div>
 
-
-<!--==============================
-Appointment Area  
-==============================-->
 <div class="map-sec">
 	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2703.5321695691944!2d0.6948993892388788!3d47.24349006757399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1719178260000!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
-</div>{% endblock %}
+</div>
+{% endblock %}

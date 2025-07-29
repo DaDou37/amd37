@@ -5,10 +5,14 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
+/**
+ * Entity class representing a user project.
+ *
+ * Each project is associated with a user, a type, a category, and includes
+ * metadata such as title, description, image, timestamps, and online status.
+ */
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
 {
@@ -17,51 +21,79 @@ class Project
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * Project title.
+     */
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    /**
+     * Detailed description of the project.
+     */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    /**
+     * Date and time when the project was created.
+     */
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    /**
+     * Optional project cover image (filename or URL).
+     */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    /**
+     * The user who owns or created the project.
+     */
     #[ORM\ManyToOne(inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    /**
+     * The type/category of the project (e.g., website, application).
+     */
     #[ORM\ManyToOne(inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ProjectType $type = null;
 
     /**
-     * @var Collection<int, Gallery>
+     * URL-friendly version of the title.
      */
-    #[ORM\OneToMany(targetEntity: Gallery::class, mappedBy: 'project')]
-    private Collection $galleries;
-
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    /**
+     * Last time the project was updated (optional).
+     */
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    /**
+     * Whether the project is visible/online.
+     */
     #[ORM\Column]
     private ?bool $isOnline = null;
 
+    /**
+     * Project classification or broader category.
+     */
     #[ORM\ManyToOne(inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ProjectCategory $projectCategory = null;
 
+    /**
+     * Automatically sets creation date and default online status.
+     */
     public function __construct()
     {
-        $this->galleries = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->isOnline = false;
     }
+
+    // --- Getters & Setters ---
 
     public function getId(): ?int
     {
@@ -76,7 +108,6 @@ class Project
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -88,7 +119,6 @@ class Project
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -100,7 +130,6 @@ class Project
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -112,7 +141,6 @@ class Project
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
-
         return $this;
     }
 
@@ -124,37 +152,6 @@ class Project
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Gallery>
-     */
-    public function getGalleries(): Collection
-    {
-        return $this->galleries;
-    }
-
-    public function addGallery(Gallery $gallery): static
-    {
-        if (!$this->galleries->contains($gallery)) {
-            $this->galleries->add($gallery);
-            $gallery->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGallery(Gallery $gallery): static
-    {
-        if ($this->galleries->removeElement($gallery)) {
-            // set the owning side to null (unless already changed)
-            if ($gallery->getProject() === $this) {
-                $gallery->setProject(null);
-            }
-        }
-
         return $this;
     }
 
@@ -166,7 +163,6 @@ class Project
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
-
         return $this;
     }
 
@@ -178,7 +174,6 @@ class Project
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
@@ -190,7 +185,6 @@ class Project
     public function setIsOnline(bool $isOnline): static
     {
         $this->isOnline = $isOnline;
-
         return $this;
     }
 
@@ -202,7 +196,6 @@ class Project
     public function setType(?ProjectType $type): static
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -214,11 +207,6 @@ class Project
     public function setProjectCategory(?ProjectCategory $projectCategory): static
     {
         $this->projectCategory = $projectCategory;
-
         return $this;
     }
-
-
-
-
 }

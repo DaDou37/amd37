@@ -3,12 +3,8 @@
 {% block title %}AMD37{% endblock %}
 
 {% block body %}
-<!--==============================
-    Hero Area
-==============================-->
 <div class="as-hero-wrapper hero-1" id="hero">
     <div class="hero-slider-1 number-dots as-carousel" id="heroSlide1" data-fade="true" data-slide-show="1" data-md-slide-show="1" data-dots="true" data-xl-dots="true" data-ml-dots="true" data-lg-dots="true">
-
         <div class="as-hero-slide">
             <div class="as-hero-bg" data-bg-src="assets/img/hero/vehicule.png"></div>
             <div class="container">
@@ -20,8 +16,8 @@
                             </span>
                             <h1 class="hero-title text-white" data-ani="slideinleft" data-ani-delay="0.2s">Là ou l’expertise rencontre les moteurs</h1>
                             <div class="btn-group" data-ani="slideinleft" data-ani-delay="0.4s">
-                                <a href="/a-propos" class="as-btn style2">DETAILS</a>
-                                <a href="/service" class="as-btn style3">SERVICES</a>
+                                <a href="{{ path('app_about') }}" class="as-btn style2">DETAILS</a>
+                                <a href="#services" class="as-btn style3">SERVICES</a>
                             </div>
                         </div>
                     </div>
@@ -30,10 +26,7 @@
         </div>
     </div>
 </div>
-<!--======== / Hero Section ========-->
-<!--==============================
-    About Area  
-==============================-->
+
 <section class="about-area space-top custom-space-bottom" data-bg-src="assets/img/about/about_bg.png">
     <div class="container-fluid">
         <div class="about-wrap" >
@@ -48,14 +41,14 @@
                     <div class="title-area mb-0">
                         <h3 class="sub-title">A PROPOS</h3>
                         <h2 class="sec-title">Atelier de Mécanique à Domicile</h2>
-                        <p class="sec-text">Depuis 2015, AMD37 propose un service de mécanique à domicile pour particuliers et professionnels, en Indre-et-Loire. De l’entretien courant aux interventions sur tout type de vehicule, poids lourds, engins de chantier et locomotive. Profitez d’un savoir-faire complet, sans vous déplacer</p>
+                        <p class="sec-text">Depuis 2015, AMD37 propose un service de mécanique à domicile pour particuliers et professionnels, en Indre-et-Loire. De l’entretien courant aux interventions sur tout type de véhicule, poids lourds, engins de chantier et locomotives. Profitez d’un savoir-faire complet, sans vous déplacer</p>
                         <p class="sec-text">Réactivité, expertise, mobilité : découvrez notre histoire.</p>
                         <div class="about-wrap-group">
                             <div class="about-card">
                                 <div class="icon">
                                     <img src="assets/img/about/about-icon-1.svg" alt="img">
                                 </div>
-                                <h5 class="card-title">Equipé de tous les outils <br> les plus recents</h5>
+                                <h5 class="card-title">Équipé de tous les outils <br> les plus recents</h5>
                             </div>
                             <div class="about-card">
                                 <div class="icon">
@@ -65,7 +58,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a class="as-btn" href="/a-propos">PLUS DE DETAILS</a>
+                            <a class="as-btn" href="{{ path('app_about') }}">PLUS DE DETAILS</a>
                         </div>
                     </div>
                 </div>
@@ -73,9 +66,7 @@
         </div>
     </div>
 </section>
-<!--==============================
-    Counter Area  
-==============================-->
+
 <div class="counter-area p-lg-0 space">
     <div class="container">
         <div class="row gy-25 justify-content-center">
@@ -85,7 +76,7 @@
                         <img src="assets/img/counter/counter_icon_1.svg" alt="img">
                     </div>
                     <h2 class="counter-card_number"><span class="counter-number">3000</span>+</h2>
-                    <p class="counter-card_text">Vehicule reparé</p>
+                    <p class="counter-card_text">Véhicule reparé</p>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
@@ -94,7 +85,7 @@
                         <img src="assets/img/counter/counter_icon_2.svg" alt="img">
                     </div>
                     <h2 class="counter-card_number"><span class="counter-number">20</span>+</h2>
-                    <p class="counter-card_text">Partenaire & Collaborateur</p>
+                    <p class="counter-card_text">Partenaires & Collaborateurs</p>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
@@ -103,7 +94,7 @@
                         <img src="assets/img/counter/counter_icon_3.svg" alt="img">
                     </div>
                     <h2 class="counter-card_number"><span class="counter-number">3000</span>+</h2>
-                    <p class="counter-card_text">Clients satisfait</p>
+                    <p class="counter-card_text">Clients satisfaits</p>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
@@ -112,20 +103,16 @@
                         <img src="assets/img/counter/counter_icon_4.svg" alt="img">
                     </div>
                     <h2 class="counter-card_number"><span class="counter-number">5</span>+</h2>
-                    <p class="counter-card_text">Prix gagné</p>
+                    <p class="counter-card_text">Prix Gagnés</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--==============================
-    Why-choose-us Area  
-==============================-->
+
 <div class="wcu-area">
     <div class="as-container2 position-relative bg-title">
-        <!-- bg animated image -->
         <div class="anime-img-1 shape-mockup jump d-none d-lg-block" data-bottom="0%" data-right="0"><img src="assets/img/wcu/wcu_shape.png" alt="img"></div>    
-
         <div class="row gx-0">
             <div class="col-xl-6 col-lg-5">
                 <div class="wcu-thumb" data-bg-src="assets/img/wcu/frein.jpg">
@@ -145,7 +132,7 @@
                                 1
                             </div>
                             <div class="media-body">
-                                <h3 class="h4 info-media_title">Equipements Récents</h3>
+                                <h3 class="h4 info-media_title">Équipements Récents</h3>
                                 <p class="info-media_text">Notre véhicule d’intervention est équipé de matériel moderne et performant, capable de répondre à toutes les situations, du simple entretien aux interventions techniques complexes. </p>
                             </div>
                         </div>
@@ -177,19 +164,14 @@
         </div>
     </div>
 </div>
-
-
-<!--==============================
-    Cta Area  
-==============================-->
-<div class="container-fluid p-0 mt-5">
+<div class="container-fluid p-0 mt-5" id="services">
     <div class="cta-wrap space-top" data-bg-src="assets/img/cta/cta_bg.png">
         <div class="row justify-content-center">
             <div class="col-xxl-6 col-xl-8 col-lg-8 text-center">
                 <div class="title-area mb-0">
                     <h2 class="sec-title text-white">Vous Cherchez Un Endroit De Confiance Pour Faire Rouler Vos Véhicules</h2>
                     <div class="btn-group justify-content-center">
-                        <a class="as-btn style2" href="/contact">Contactez</a>
+                        <a class="as-btn style2" href="{{ path('app_contact_index') }}">Contactez</a>
                         <a class="as-btn style3" href="tel:0699483005"><i class="fa-solid fa-phone me-1"></i> 0699483005</a>
                     </div>
                 </div>
@@ -197,12 +179,8 @@
         </div>
     </div>
 </div>
-<!--==============================
-    Service Area, mettre avec la base de donnée  
-==============================-->
-<div class="container">
-    <div class="service-slider row as-carousel g-0" data-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1" data-xs-slide-show="1" data-dots="true" data-xl-dots="true" data-ml-dots="true" data-lg-dots="true">
-
+<div class="container" >
+    <div class="service-slider row as-carousel g-0" data-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1" data-xs-slide-show="1" data-dots="true" data-xl-dots="true" data-ml-dots="true" data-lg-dots="true" >
         {% for service in services %}
             <div class="col-lg-4 col-md-6">
                 <div class="service-card">
@@ -210,25 +188,19 @@
                         <a>{{ service.title }}</a>
                     </h3>
                     <p class="service-card_text">{{ service.description|u.truncate(120, '...') }}</p>
-
                     <div class="service-card_img">
                         <div class="service-card_icon">
                             <img class="svg-img" src="{{ asset('assets/img/icon/' ~ service.iconFilename) }}" alt="icon">
                         </div>
-
                     </div>
                 </div>
             </div>
         {% else %}
             <p>Aucun service trouvé.</p>
         {% endfor %}
-
     </div>
 </div>
 
-<!--==============================
-    Team Area
-==============================-->
 <section class="team-area space" data-bg-src="assets/img/team/team_bg_1.png">
     <div class="container">
         <div class="title-area text-center">
@@ -248,21 +220,18 @@
                         <img src="assets/img/team/pp.jpg" alt="Team">
                     </div>
                     <div class="team-content">
-                        <h3 class="team-title h4"><a href="/a-propos">Mestivier Sylvain</a></h3>
+                        <h3 class="team-title h4"><a href="{{ path('app_about') }}">Mestivier Sylvain</a></h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--==============================
-    Portfolio Area  
-==============================-->
+
 <section class="portfolio-area space-top" data-overlay="title" data-opacity="9" data-bg-src="{{ asset('assets/img/portfolio/outils.jpg') }}">
     <div class="portfolio-anime-img shape-mockup d-none d-xl-block" data-top="0%" data-left="0">
         <img class="svg-img" src="{{ asset('assets/img/portfolio/portfolio_bg_shape.svg') }}" alt="img">
     </div>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9">
@@ -272,13 +241,11 @@
             </div>
         </div>
     </div>
-
     <div class="container-fluid p-0">
         <div class="row portfolio-slider-1 as-carousel"
              data-slide-show="5" data-ml-slide-show="4" data-lg-slide-show="4"
              data-md-slide-show="3" data-sm-slide-show="1" data-xs-slide-show="1"
              data-dots="false" data-infinite="true">
-
             {% for project in projects %}
                 <div class="col-lg-3">
                     <div class="portfolio-box">
@@ -305,26 +272,18 @@
                     <p>Aucun projet à afficher pour le moment.</p>
                 </div>
             {% endfor %}
-
         </div>
     </div>
 </section>
 
-
-
-<!--==============================
-    Testimonial Area 2  
-==============================-->
 <section class="testiomonial-area space">
     <div class="container">
         <div class="row justify-content-center">
-            <!-- Colonne image avec indicateurs -->
             <div class="col-lg-6 order-lg-2 align-self-center">
                 <div class="testi-thumb text-center" data-bg-src="{{ asset('assets/img/testimonial/testi_thumb_bg.png') }}">
                     <img src="{{ asset('assets/img/pixabay/smile.jpg') }}" alt="img">
                 </div>
             </div>
-            <!-- Colonne texte avec les témoignages dynamiques -->
             <div class="col-lg-6 order-lg-1">
                 <div class="title-area mb-0 text-center text-lg-start">
                     <span class="sub-title"><span class="double-line d-lg-none"></span>Avis</span>
@@ -355,10 +314,6 @@
     </div>
 </section>
 
-
-	<!--==============================
-		    Brand Area  
-		==============================-->
 	<div class="client-sec1 space-bottom">
 		<div class="container">
 			<div class="row">

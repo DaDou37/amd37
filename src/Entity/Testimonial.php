@@ -7,6 +7,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Represents a testimonial left by a user or visitor.
+ * Can optionally be linked to a user account.
+ */
 #[ORM\Entity(repositoryClass: TestimonialRepository::class)]
 class Testimonial
 {
@@ -15,6 +19,9 @@ class Testimonial
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * Author name of the testimonial.
+     */
     #[ORM\Column(length: 100)]
     #[Assert\NotBlank(message: 'Le nom est obligatoire')]
     #[Assert\Length(
@@ -23,6 +30,9 @@ class Testimonial
     )]
     private ?string $author = null;
 
+    /**
+     * Main content/message of the testimonial.
+     */
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Le message est obligatoire')]
     #[Assert\Length(
@@ -33,16 +43,28 @@ class Testimonial
     )]
     private ?string $content = null;
 
+    /**
+     * Date and time when the testimonial was created.
+     */
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    /**
+     * Whether the testimonial has been approved for public display.
+     */
     #[ORM\Column(type: 'boolean')]
     private bool $isApproved = false;
 
+    /**
+     * Optional email address of the testimonial author.
+     */
     #[ORM\Column(length: 180, nullable: true)]
     #[Assert\Email(message: 'Adresse email invalide')]
     private ?string $email = null;
 
+    /**
+     * Optional subject or title of the testimonial.
+     */
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
@@ -50,13 +72,21 @@ class Testimonial
     )]
     private ?string $subject = null;
 
+    /**
+     * Optional relation to the user entity (if the testimonial is from a registered user).
+     */
     #[ORM\ManyToOne(inversedBy: 'testimonials')]
     private ?User $user = null;
 
+    /**
+     * Constructor to auto-set creation date.
+     */
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
+
+    // --- Getters & Setters ---
 
     public function getId(): ?int
     {
@@ -71,7 +101,6 @@ class Testimonial
     public function setAuthor(string $author): static
     {
         $this->author = $author;
-
         return $this;
     }
 
@@ -83,7 +112,6 @@ class Testimonial
     public function setContent(string $content): static
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -95,7 +123,6 @@ class Testimonial
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -107,7 +134,6 @@ class Testimonial
     public function setIsApproved(bool $isApproved): static
     {
         $this->isApproved = $isApproved;
-
         return $this;
     }
 
@@ -119,7 +145,6 @@ class Testimonial
     public function setEmail(?string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -131,7 +156,6 @@ class Testimonial
     public function setSubject(?string $subject): static
     {
         $this->subject = $subject;
-
         return $this;
     }
 
@@ -143,10 +167,12 @@ class Testimonial
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 
+    /**
+     * Used for representing this entity as a string (e.g. in dropdowns).
+     */
     public function __toString(): string
     {
         return $this->author;

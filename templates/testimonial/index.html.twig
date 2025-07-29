@@ -3,36 +3,32 @@
 {% block title %}Avis
 {% endblock %}
 {% block javascripts %}
-	{% if karser_recaptcha3_site_key is defined %}
-		<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
-		<script>
-			document.addEventListener('DOMContentLoaded', function () {
-const form = document.querySelector('form[name="avis_form"]');
-form.addEventListener('submit', function (e) {
-e.preventDefault();
+{% if karser_recaptcha3_site_key is defined %}
+<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form[name="avis_form"]');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
+                const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
+                if (recaptchaInput) {
+                    recaptchaInput.value = token;
+                }
+                form.submit();  
+            });
+        });
+    });
+});
+</script>
+{% endif %}
 
-grecaptcha.ready(function () {
-grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
-const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
-if (recaptchaInput) {
-recaptchaInput.value = token;
-}
-form.submit();
-});
-});
-});
-});
-		</script>
-	{% endif %}
 {% endblock %}
 
 {% block body %}
-	<!--==============================
-		        Breadcumb
-		    ============================== -->
-	<div
-		class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
-		<!-- bg animated image/ -->
+	<div class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -48,14 +44,9 @@ form.submit();
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 
-
-<!--==============================
-    Testimonial Area
-==============================-->
 <div class="testiomonial-area-5 space" data-bg-src="{{ asset('assets/img/testimonial/testi_bg3.png') }}">
 	<div class="container">
 		<div class="title-area text-center">
@@ -93,10 +84,6 @@ form.submit();
 		<div class="text-center mt-4">
 			{{ knp_pagination_render(testimonials) }}
 		</div>
-
-		<!--==============================
-				            Review Form Area
-				        ==============================-->
 		<section class="space-bottom">
 			<div class="review-thumb shape-mockup d-none d-md-block" data-top="0" data-left="0">
 				<img src="{{ asset('assets/img/normal/stars.png') }}" alt="review">

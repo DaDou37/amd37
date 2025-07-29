@@ -1,36 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}A Propos
+{% block title %}À Propos
 {% endblock %}
 
 {% block body %}
 
-	<!--==============================
-		    Breadcumb
-		============================== -->
-	<div
-		class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
-		<!-- bg animated image/ -->
+	<div class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="breadcumb-content">
-						<h1 class="breadcumb-title">A Propos</h1>
+						<h1 class="breadcumb-title">À Propos</h1>
 						<ul class="breadcumb-menu">
 							<li>
-								<a href="/">Acceuil</a>
+								<a href="{{ path('app_home') }}">ACCUEIL</a>
 							</li>
-							<li class="active">A Propos</li>
+							<li class="active">À Propos</li>
 						</ul>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-	<!--==============================
-		    About Area 2 
-		==============================-->
+
 	<section class="about-area2 space overflow-hidden">
 		<div class="container">
 			<div class="row">
@@ -44,25 +36,25 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="title-area mb-0">
-						<h3 class="sub-title">A PROPOS DE L'ENTREPRISE</h3>
-						<h2 class="sec-title">Bienvenue Sur AMD37</h2>
-						<p class="content">Fort de 30 ans d’expérience, AMD37 intervient chez vous ou sur site pour l’entretien et la réparation de tous types de véhicules : autos, poids lourds, engins de chantier et locomotive. Rapide, pro, et toujours équipé.</p>
+						<h3 class="sub-title">À PROPOS DE L'ENTREPRISE</h3>
+						<h2 class="sec-title">Bienvenue sur AMD37</h2>
+						<p class="content">Fort de 30 ans d’expérience, AMD37 intervient chez vous ou sur site pour l’entretien et la réparation de tous types de véhicules : autos, poids lourds, engins de chantier et locomotives. Rapide, pro, et toujours équipé.</p>
 						<div class="list-column2">
 							<div class="checklist">
 								<ul>
 									<li><img src="assets/img/icon/check.svg" alt="img">
-										Mobilité Sur Tout le Département</li>
+										Mobilité sur tout le département</li>
 									<li><img src="assets/img/icon/check.svg" alt="img">
 										Service & Maintenance</li>
 									<li><img src="assets/img/icon/check.svg" alt="img">
-										Montage D'Accessoires</li>
+										Montage d'accessoires</li>
 								</ul>
 							</div>
 							<div class="checklist">
 								<ul>
-									<li><img src="assets/img/icon/check.svg" alt="img">Automobile & Poids Lourd</li>
-									<li><img src="assets/img/icon/check.svg" alt="img">Engin Agricole & Engin De Traveaux Publics</li>
-									<li><img src="assets/img/icon/check.svg" alt="img">locomotive</li>
+									<li><img src="assets/img/icon/check.svg" alt="img">Automobile & poids lourds</li>
+									<li><img src="assets/img/icon/check.svg" alt="img">Engins agricoles & engins de travaux publics</li>
+									<li><img src="assets/img/icon/check.svg" alt="img">Locomotives</li>
 								</ul>
 							</div>
 						</div>
@@ -72,65 +64,59 @@
 		</div>
 	</section>
 
+	<section class="team-area-2 space position-relative">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-lg-3">
+					<div class="team-card-2">
+						<div class="team-img">
+							<img src="assets/img/team/pp.jpg" alt="MESTIVIER SYLVAIN" class="img-fluid">
+						</div>
+						<div class="team-content text-center">
+							<h3 class="team-title h4">MESTIVIER SYLVAIN</h3>
+							<div class="as-social style-2">
+								<a href="https://facebook.com/" target="_blank">
+									<i class="fa-brands fa-facebook-f"></i>
+								</a>
+								<a href="https://twitter.com/" target="_blank">
+									<i class="fa-brands fa-twitter"></i>
+								</a>
+								<a href="https://linkedin.com/" target="_blank">
+									<i class="fa-brands fa-linkedin-in"></i>
+								</a>
+								<a href="https://google.com/" target="_blank">
+									<i class="fa-brands fa-google"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-1 d-none d-lg-block"></div>
+				<div class="col-lg-4">
+					<div class="title-area">
+						<h3 class="sub-title">
+							<span class="double-line"></span>QUI JE SUIS ?</h3>
+						<p>
+							Je m’appelle Sylvain Mestivier, mécanicien passionné depuis plus de 30 ans.
+														                        Mon parcours a débuté en 1993 chez un agent Citroën, et s’est construit au fil des années dans des entreprises spécialisées en mécanique automobile, poids lourds, engins de chantier, et systèmes techniques complexes (citernes, hydrocarbures, etc.).<br><br>
+							J’ai occupé des postes allant de technicien à chef d’atelier, jusqu’à responsable de site, en passant par l’assistance 24h/24 sur véhicules industriels.
+														                        De 2007 à 2014, j’ai notamment dirigé l’atelier d’une entreprise de travaux publics, encadré une équipe et géré l’achat/vente de véhicules. Ce bagage m’a permis de lancer AMD37 en 2015, pour proposer un service de mécanique à domicile ou sur site, professionnel et humain.<br><br>
+							Aujourd’hui, je mets cette expertise au service des particuliers, des entreprises et des parcs de véhicules, avec un seul objectif : vous simplifier la mécanique, sans compromis sur la qualité.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="shape-mockup" style="position: absolute; bottom: 120px; right: 0; z-index: 0;">
+			<img class="about-thumb-bg2" src="assets/img/about/about_thumb_bg_2.png" alt="img" style="opacity: 0.3;">
+		</div>
+	</section>
 
-	<!--==============================
-		    Team Area 02
-		==============================-->
-<section class="team-area-2 space position-relative">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <!-- Col gauche : photo + infos -->
-            <div class="col-lg-3">
-                <div class="team-card-2">
-                    <div class="team-img">
-                        <img src="assets/img/team/pp.jpg" alt="MESTIVIER SYLVAIN" class="img-fluid">
-                    </div>
-                    <div class="team-content text-center">
-                        <h3 class="team-title h4">MESTIVIER SYLVAIN</h3>
-                        <div class="as-social style-2">
-                            <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="https://linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="https://google.com/" target="_blank"><i class="fa-brands fa-google"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Espace entre les colonnes -->
-            <div class="col-lg-1 d-none d-lg-block"></div>
-
-            <!-- Col droite : texte -->
-            <div class="col-lg-4">
-                <div class="title-area">
-                    <h3 class="sub-title"><span class="double-line"></span>QUI JE SUIS ?</h3>
-                    <p>
-                        Je m’appelle Sylvain Mestivier, mécanicien passionné depuis plus de 30 ans.
-                        Mon parcours a débuté en 1993 chez un agent Citroën, et s’est construit au fil des années dans des entreprises spécialisées en mécanique automobile, poids lourds, engins de chantier, et systèmes techniques complexes (citernes, hydrocarbures, etc.).<br><br>
-                        J’ai occupé des postes allant de technicien à chef d’atelier, jusqu’à responsable de site, en passant par l’assistance 24h/24 sur véhicules industriels.
-                        De 2007 à 2014, j’ai notamment dirigé l’atelier d’une entreprise de travaux publics, encadré une équipe et géré l’achat/vente de véhicules. Ce bagage m’a permis de lancer AMD37 en 2015, pour proposer un service de mécanique à domicile ou sur site, professionnel et humain.<br><br>
-                        Aujourd’hui, je mets cette expertise au service des particuliers, des entreprises et des parcs de véhicules, avec un seul objectif : vous simplifier la mécanique, sans compromis sur la qualité.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Image décorative à droite -->
-<div class="shape-mockup" style="position: absolute; bottom: 120px; right: 0; z-index: 0;">
-    <img class="about-thumb-bg2" src="assets/img/about/about_thumb_bg_2.png" alt="img" style=" opacity: 0.3;">
-</div>
-</section>
-
-	<!--==============================
-		    Why-choose-us Area 04 
-		==============================-->
 	<div class="wcu-area-4" data-bg-src="assets/img/wcu/wcu_bg.png">
 		<div class="container-fluid p-0">
 			<div class="row gx-0">
 				<div class="col-xl-6">
-					<div class="wcu-thumb style-2 video-box1" data-bg-src="assets/img/pixabay/car_mecanique_2.jpg">
-					</div>
+					<div class="wcu-thumb style-2 video-box1" data-bg-src="assets/img/pixabay/car_mecanique_2.jpg"></div>
 				</div>
 				<div class="col-xl-6">
 					<div class="wcu-wrap4 space-top">
@@ -139,14 +125,13 @@
 							<h2 class="sec-title">La Garantie Assurée.</h2>
 							<p class="content">Avec plus de 30 ans d’expérience, AMD37 vous propose un service de mécanique complet directement à domicile ou sur site. Équipé, réactif, et à l’écoute, j’interviens sur tous types de véhicules particuliers, pros, poids lourds ou engins en toute autonomie et avec professionnalisme.</p>
 						</div>
-						<div class="row  g-4">
+						<div class="row g-4">
 							<div class="col-sm-6">
 								<div class="wcu-card">
 									<div class="icon">
 										<img src="assets/img/icon/wcu-box-icon-1.svg" alt="icon">
 									</div>
-									<h3 class="card-title h4">Large Gamme De Marque</h3>
-									
+									<h3 class="card-title h4">Large Gamme de Marques</h3>
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -154,7 +139,7 @@
 									<div class="icon">
 										<img src="assets/img/icon/wcu-box-icon-2.svg" alt="icon">
 									</div>
-									<h3 class="card-title h4">Prix Raisonnable</h3>
+									<h3 class="card-title h4">Prix Raisonnables</h3>
 								</div>
 							</div>
 						</div>
@@ -164,56 +149,42 @@
 		</div>
 	</div>
 
-	<!--==============================
-		    Testimonial Area 4  
-		==============================-->
 	<div class="container">
-	<div class="testiomonial-area-4 space" data-bg-src="{{ asset('assets/img/testimonial/testi_bg.png') }}">
-		<div class="title-area text-center">
-			<span class="sub-title">
-				<span class="double-line"></span>
-				AVIS</span>
-			<h2 class="sec-title">Retour Client</h2>
-		</div>
-
-		<div class="row testimonial-slider3 as-carousel" 
-			 data-slide-show="3" 
-			 data-lg-slide-show="2" 
-			 data-md-slide-show="2" 
-			 data-sm-slide-show="1" 
-			 data-xs-slide-show="1" 
-			 data-arrows="true" 
-			 data-xl-arrows="true" 
-			 data-ml-arrows="true">
-
-			{% for testimonial in testimonials %}
-				<div class="col">
-					<div class="testi-box3 bg-gray">
-						<div class="quote-icon">
-							<img src="{{ asset('assets/img/testimonial/quote-icon2.svg') }}" alt="quote">
-						</div>
-						<p class="testi_content">{{ testimonial.content }}</p>
-						<div class="testi-box_profile">
-							<div class="details">
-								<h4 class="testi-box_name">{{ testimonial.author }}</h4>
-								<span class="testi-box_desig">
-									{{ testimonial.createdAt ? testimonial.createdAt|date('d M Y') : '' }}
-								</span>
+		<div class="testimonial-area-4 space" data-bg-src="{{ asset('assets/img/testimonial/testi_bg.png') }}">
+			<div class="title-area text-center">
+				<span class="sub-title">
+					<span class="double-line"></span>
+					AVIS
+				</span>
+				<h2 class="sec-title">Retour Client</h2>
+			</div>
+			<div class="row testimonial-slider3 as-carousel" data-slide-show="3" data-lg-slide-show="2" data-md-slide-show="2" data-sm-slide-show="1" data-xs-slide-show="1" data-arrows="true" data-xl-arrows="true" data-ml-arrows="true">
+				{% for testimonial in testimonials %}
+					<div class="col">
+						<div class="testi-box3 bg-gray">
+							<div class="quote-icon">
+								<img src="{{ asset('assets/img/testimonial/quote-icon2.svg') }}" alt="quote">
+							</div>
+							<p class="testi_content">{{ testimonial.content }}</p>
+							<div class="testi-box_profile">
+								<div class="details">
+									<h4 class="testi-box_name">{{ testimonial.author }}</h4>
+									<span class="testi-box_desig">
+										{{ testimonial.createdAt ? testimonial.createdAt|date('d M Y') : '' }}
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			{% else %}
-				<div class="col-12 text-center">
-					<p>Aucun avis trouvé.</p>
-				</div>
-			{% endfor %}
+				{% else %}
+					<div class="col-12 text-center">
+						<p>Aucun avis trouvé.</p>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
-</div>
-	<!--==============================
-		    Brand Area  
-		==============================-->
+
 	<div class="client-sec1 space-bottom">
 		<div class="container">
 			<div class="row">
@@ -222,35 +193,35 @@
 						<h2 class="client-title h4 mb-0">
 							<span class="double-line"></span>
 							NOS MARQUES & PARTENAIRES
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="client-box-border">
-				<div class="row as-carousel" id="brandSlide1" data-slide-show="5" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="false">
-					<div class="col-auto client-box">
-						<img src="assets/img/client/bv2ii.png" alt="Client Logo">
-					</div>
-					<div class="col-auto client-box">
-						<img src="assets/img/client/Deutz.png" alt="Client Logo">
-					</div>
-					<div class="col-auto client-box">
-						<img src="assets/img/client/ebpl.png" alt="Client Logo">
-					</div>
-					<div class="col-auto client-box">
-						<img src="assets/img/client/Peugeot.png" alt="Client Logo">
-					</div>
-					<div class="col-auto client-box">
-						<img src="assets/img/client/renault.png" alt="Client Logo">
-					</div>
-					<div class="col-auto client-box">
-						<img src="assets/img/client/Sarl.png" alt="Client Logo">
-					</div>
-					<div class="col-auto client-box">
-						<img src="assets/img/client/Yanmar.png" alt="Client Logo">
+				<div class="client-box-border">
+					<div class="row as-carousel" id="brandSlide1" data-slide-show="5" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="false">
+						<div class="col-auto client-box">
+							<img src="assets/img/client/bv2ii.png" alt="Client Logo">
+						</div>
+						<div class="col-auto client-box">
+							<img src="assets/img/client/Deutz.png" alt="Client Logo">
+						</div>
+						<div class="col-auto client-box">
+							<img src="assets/img/client/ebpl.png" alt="Client Logo">
+						</div>
+						<div class="col-auto client-box">
+							<img src="assets/img/client/Peugeot.png" alt="Client Logo">
+						</div>
+						<div class="col-auto client-box">
+							<img src="assets/img/client/renault.png" alt="Client Logo">
+						</div>
+						<div class="col-auto client-box">
+							<img src="assets/img/client/Sarl.png" alt="Client Logo">
+						</div>
+						<div class="col-auto client-box">
+							<img src="assets/img/client/Yanmar.png" alt="Client Logo">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-{% endblock %}
+	{% endblock %}

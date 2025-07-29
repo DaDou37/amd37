@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales, CGU et Politique de confidentialité{% endblock %}
+
+{% block body %}
+<div class="breadcumb-wrapper" data-bg-src="assets/img/hero/vehicule.png" data-overlay="title" data-opacity="7">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="breadcumb-content">
+                    <h1 class="breadcumb-title">Mentions légales</h1>
+                    <ul class="breadcumb-menu">
+                        <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                        <li class="active">Mentions légales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="legal-page space">
+    <div class="container">
+        <h1 class="mb-4">Mentions légales, CGU & Politique de confidentialité</h1>
+
+        <hr class="my-4">
+        <h2>1. Mentions légales</h2>
+        <p><strong>Nom de l’entreprise :</strong> AMD37</p>
+        <p><strong>Responsable de la publication :</strong> Mestivier Sylvain</p>
+        <p><strong>Adresse :</strong> 15 rue de Château Gaillard, 37250 Sorigny, France</p>
+        <p><strong>Téléphone :</strong> <a href="tel:+33699483005">06 99 48 30 05</a></p>
+        <p><strong>Email :</strong> <a href="mailto:sylvainmestivier@outlook.fr">sylvainmestivier@outlook.fr</a></p>
+        <p><strong>SIRET :</strong> 810 426 569</p>
+        <p><strong>Hébergeur :</strong> PlanetHoster – <a href="https://www.planethoster.com">www.planethoster.com</a></p>
+
+        <hr class="my-4">
+        <h2>2. Conditions générales d’utilisation (CGU)</h2>
+        <p>En accédant au site <strong>amd37.fr</strong>, l’utilisateur accepte pleinement les conditions d’utilisation décrites ici. Le site est accessible à tout moment, sauf en cas de maintenance décidée par AMD37.</p>
+        <p>L’utilisateur s’engage à ne pas perturber le fonctionnement du service et à respecter la législation française en vigueur.</p>
+        <p>Toute reproduction ou exploitation, même partielle, des contenus du site est interdite sans autorisation écrite préalable.</p>
+
+        <hr class="my-4">
+        <h2>3. Politique de confidentialité</h2>
+        <p>Les données personnelles collectées via les formulaires sont utilisées uniquement dans le cadre des services proposés (contact, devis, avis, etc.).</p>
+        <p>Elles ne sont ni vendues ni transmises à des tiers, et sont conservées dans les limites autorisées par la loi.</p>
+        <p>Conformément au RGPD, vous pouvez exercer vos droits d’accès, de rectification, de suppression ou d’opposition à vos données à tout moment en écrivant à : <a href="mailto:sylvainmestivier@outlook.fr">sylvainmestivier@outlook.fr</a>.</p>
+
+        <hr class="my-4">
+        <h2>4. Utilisation des cookies</h2>
+        <p>Le site utilise des cookies pour améliorer l’expérience utilisateur, notamment via des outils d’analyse ou de sécurité.</p>
+        <p>Vous pouvez à tout moment désactiver les cookies dans les paramètres de votre navigateur.</p>
+
+        <p class="mt-5">
+            <a href="{{ path('app_home') }}" class="as-btn">Retour à l’accueil</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+/**
+ * Represents a user in the system.
+ * Implements Symfony's UserInterface and PasswordAuthenticatedUserInterface for security.
+ */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -18,168 +22,163 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * User's first name.
+     */
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
 
+    /**
+     * User's last name.
+     */
     #[ORM\Column(length: 100)]
     private ?string $lastname = null;
 
+    /**
+     * Unique email address (used as username identifier).
+     */
     #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
+    /**
+     * Hashed password.
+     */
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+    /**
+     * User role (e.g. ROLE_USER, ROLE_ADMIN).
+     */
     #[ORM\Column(length: 50)]
     private ?string $role = 'ROLE_USER';
 
+    /**
+     * Optional profile picture path or filename.
+     */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    /**
+     * Account creation timestamp.
+     */
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    /**
+     * Timestamp of the last update (nullable).
+     */
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $updatedAt = null;
 
+    /**
+     * Projects created or owned by the user.
+     */
     #[ORM\OneToMany(targetEntity: Project::class, mappedBy: 'user')]
     private Collection $projects;
 
+    /**
+     * Testimonials written by this user.
+     */
     #[ORM\OneToMany(targetEntity: Testimonial::class, mappedBy: 'user')]
     private Collection $testimonials;
 
-    #[ORM\OneToMany(targetEntity: Gallery::class, mappedBy: 'user')]
-    private Collection $galleries;
-
+    /**
+     * Services offered by this user.
+     */
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'user')]
     private Collection $services;
 
+    /**
+     * Contacts/messages related to this user.
+     */
     #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'user')]
     private Collection $contacts;
 
+    /**
+     * Constructor initializing all related entity collections.
+     */
     public function __construct()
     {
         $this->projects = new ArrayCollection();
         $this->testimonials = new ArrayCollection();
-        $this->galleries = new ArrayCollection();
         $this->services = new ArrayCollection();
         $this->contacts = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    // --- Basic Getters & Setters ---
 
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
+    public function getId(): ?int { return $this->id; }
 
-    public function setFirstname(string $firstname): static
-    {
+    public function getFirstname(): ?string { return $this->firstname; }
+    public function setFirstname(string $firstname): static {
         $this->firstname = $firstname;
         return $this;
     }
 
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): static
-    {
+    public function getLastname(): ?string { return $this->lastname; }
+    public function setLastname(string $lastname): static {
         $this->lastname = $lastname;
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
+    public function getEmail(): ?string { return $this->email; }
+    public function setEmail(string $email): static {
         $this->email = $email;
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
+    public function getPassword(): ?string { return $this->password; }
+    public function setPassword(string $password): static {
         $this->password = $password;
         return $this;
     }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): static
-    {
+    public function getRole(): ?string { return $this->role; }
+    public function setRole(string $role): static {
         $this->role = $role;
         return $this;
     }
 
-    public function getRoles(): array
-    {
-        return [$this->role ?? 'ROLE_USER'];
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->email ?? '';
-    }
-
-    public function eraseCredentials(): void
-    {
-        // Rien à nettoyer ici
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): static
-    {
+    public function getPicture(): ?string { return $this->picture; }
+    public function setPicture(?string $picture): static {
         $this->picture = $picture;
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
+    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static {
         $this->createdAt = $createdAt;
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTime $updatedAt): static
-    {
+    public function getUpdatedAt(): ?\DateTime { return $this->updatedAt; }
+    public function setUpdatedAt(?\DateTime $updatedAt): static {
         $this->updatedAt = $updatedAt;
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->email; // ou firstName . ' ' . lastName, selon ce que tu veux afficher
+    /**
+     * Returns a string representation (email or full name).
+     */
+    public function __toString(): string {
+        return $this->email;
     }
 
-    // Relations setters/getters (pas modifiés ici)
+    // --- Symfony Security Methods ---
+
+    public function getRoles(): array {
+        return [$this->role ?? 'ROLE_USER'];
+    }
+
+    public function getUserIdentifier(): string {
+        return $this->email ?? '';
+    }
+
+    public function eraseCredentials(): void {
+        // Clear sensitive temporary data if needed
+    }
+
+    // --- Relationships Getters & Setters ---
 
     public function getProjects(): Collection { return $this->projects; }
     public function addProject(Project $project): static {
@@ -207,21 +206,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeTestimonial(Testimonial $testimonial): static {
         if ($this->testimonials->removeElement($testimonial) && $testimonial->getUser() === $this) {
             $testimonial->setUser(null);
-        }
-        return $this;
-    }
-
-    public function getGalleries(): Collection { return $this->galleries; }
-    public function addGallery(Gallery $gallery): static {
-        if (!$this->galleries->contains($gallery)) {
-            $this->galleries->add($gallery);
-            $gallery->setUser($this);
-        }
-        return $this;
-    }
-    public function removeGallery(Gallery $gallery): static {
-        if ($this->galleries->removeElement($gallery) && $gallery->getUser() === $this) {
-            $gallery->setUser(null);
         }
         return $this;
     }

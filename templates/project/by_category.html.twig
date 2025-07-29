@@ -5,12 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<!--==============================
-	    Breadcumb
-	============================== -->
-	<div
-		class="breadcumb-wrapper" data-bg-src="{{ asset('assets/img/hero/vehicule.png')}}" data-overlay="title" data-opacity="7">
-		<!-- bg animated image/ -->
+	<div class="breadcumb-wrapper" data-bg-src="{{ asset('assets/img/hero/vehicule.png')}}" data-overlay="title" data-opacity="7">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -18,14 +13,13 @@
 						<h1 class="breadcumb-title">Projet Détaillé</h1>
 						<ul class="breadcumb-menu">
 							<li>
-								<a href="/">ACCUEIL</a>
+								<a href="{{ path('app_home') }}">ACCUEIL</a>
 							</li>
 							<li class="active">PROJET DETAILLE</li>
 						</ul>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<section class="space">
@@ -44,7 +38,7 @@
 							<div class="card-body">
 								<h5 class="card-title">{{ project.title }}</h5>
 								<p class="card-text">{{ project.description|slice(0, 100) ~ '...' }}</p>
-								
+
 							</div>
 						</div>
 					</div>

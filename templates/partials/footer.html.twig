@@ -1,6 +1,3 @@
-<!--==============================
-        Footer Area
-==============================-->
 <footer class="footer-wrapper footer-layout2" data-bg-src="{{ asset('assets/img/bg/footer_bg_2.png') }}">
     <div class="anime-img-1 shape-mockup jump d-none d-lg-block" data-right="0" data-top="120px"><img src="{{ asset('assets/img/bg/footer_bg_2-shape.png') }}" alt="img"></div>
 
@@ -8,8 +5,8 @@
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-md-6 col-xxl-3 col-xl-3">
-					<a href="/"><img src="{{ asset('assets/img/logo_orange 2.png') }}" alt=""></a>
-					<a href="/"><img src="{{ asset('assets/img/AMD 37.png') }}" alt=""></a>
+					<a href="{{ path('app_home') }}"><img src="{{ asset('assets/img/logo_orange 2.png') }}" alt="amd37"></a>
+					<a href="{{ path('app_home') }}"><img src="{{ asset('assets/img/AMD 37.png') }}" alt="amd37"></a>
                     <div class="widget footer-widget">
                         <div class="as-widget-about">
                             <p class="about-text">Basé en Indre-et-Loire – Dépannage, entretien, et expertise mécanique directement chez vous. Appelez-nous, on s’occupe de tout !</p>
@@ -21,8 +18,8 @@
                         <h3 class="widget_title">Contact<span class="line"></span></h3>
                         <div class="menu-all-pages-container">
                             <ul class="menu2">
-                                <li><a href="/contact">Contact</a></li>
-                                <li><a href="/">Accueil</a></li>
+                                <li><a href="{{ path('app_contact_index') }}">Contact</a></li>
+                                <li><a href="{{ path('app_home') }}">Accueil</a></li>
                             </ul>
                         </div>
                     </div>
@@ -32,9 +29,9 @@
                         <h3 class="widget_title">Liens<span class="line"></span></h3>
                         <div class="menu-all-pages-container">
                             <ul class="menu2">
-                                <li><a href="/projet">Projet</a></li>
-                                <li><a href="/a-propos">A Propos</a></li>
-                                <li><a href="/avis">Avis</a></li>
+                                <li><a href="{{ path('app_project_index') }}">Projet</a></li>
+                                <li><a href="{{ path('app_about') }}">A Propos</a></li>
+                                <li><a href="{{ path('app_testimonial_index') }}">Avis</a></li>
                             </ul>
                         </div>
                     </div>
@@ -49,8 +46,8 @@
                                 <li class="company-info"><strong>Mercredi:</strong>8H - 18H</li>
                                 <li class="company-info"><strong>Jeudi:</strong>8H - 18H</li>
                                 <li class="company-info"><strong>Vendredi:</strong>8H - 18H</li>
-                                <li class="company-info"><strong>Samedi:</strong>Closed</li>
-                                <li class="company-info"><strong>Dimanche:</strong>Closed</li>
+                                <li class="company-info"><strong>Samedi:</strong>Fermé</li>
+                                <li class="company-info"><strong>Dimanche:</strong>Fermé</li>
                             </ul>
                         </div>
                     </div>
@@ -62,14 +59,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <p class="copyright-text"><i class="fal fa-copyright me-1"></i>Copyright 2025 <a href="/">AMD37.</a> All Rights Reserved.</p>
+                    <p class="copyright-text"><i class="fal fa-copyright me-1"></i>Copyright 2025 <a href="{{ path('app_mentions_legales') }}">AMD37.</a> All Rights Reserved.</p>
                 </div>
                 <div class="col-lg-6 text-end d-none d-lg-block">
                     <div class="footer-links">
                         <ul>
-                            <li><a href="/ml">Mention Legal</a></li>
-                            <li><a href="/ml">Politique de confidentialité</a></li>
-                            <li><a href="/ml">CGU</a></li>
+                            <li><a href="{{ path('app_mentions_legales') }}">Mention Legal</a></li>
+                            <li><a href="{{ path('app_mentions_legales') }}">Politique de confidentialité</a></li>
+                            <li><a href="{{ path('app_mentions_legales') }}">CGU</a></li>
                         </ul>
                     </div>
                 </div>

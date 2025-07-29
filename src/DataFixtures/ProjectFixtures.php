@@ -11,6 +11,10 @@ use App\Repository\ProjectCategoryRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+/**
+ * Fixture to load sample projects into the database.
+ * Depends on ProjectCategoryFixtures and ProjectTypeFixtures.
+ */
 class ProjectFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
@@ -20,15 +24,24 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         private ProjectTypeRepository $typeRepository,
     ) {}
 
+    /**
+     * Load projects data into the database.
+     *
+     * @param ObjectManager $manager Doctrine object manager.
+     *
+     * @throws \Exception If no user is found or categories/types are missing.
+     */
     public function load(ObjectManager $manager): void
     {
+        // Fetch any existing user to assign as owner of projects
         $user = $this->userRepository->findOneBy([]);
         if (!$user) {
-            throw new \Exception('Aucun utilisateur en base.');
+            throw new \Exception('No user found in the database.');
         }
 
+        // Define explicit projects data (non-generated)
         $projectsData = [
-            //  POIDS LOURD
+            // POIDS LOURD
             [
                 'title' => 'Frein et roulement sur poids lourd',
                 'description' => 'Remplacement des disques et roulements sur essieu arrière.',
@@ -58,7 +71,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
                 'typeSlug' => 'carrosserie',
             ],
 
-            //  VÉHICULE LÉGER
+            // VÉHICULE LÉGER
             [
                 'title' => 'Boîte de vitesse',
                 'description' => 'Changement de boîte de vitesse.',
@@ -82,7 +95,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             ],
         ];
 
-        //  Projets ENGIN DE CHANTIER
+        // ENGIN DE CHANTIER
         $projectsData = array_merge($projectsData, $this->generateSeries(
             'Hydraulique et système électrique sur grue',
             'Réparation hydraulique sur grue & système électrique.',
@@ -99,8 +112,8 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             'categorySlug' => 'engin-de-chantier',
             'typeSlug' => 'pneumatique',
         ];
-
-        //  Projets LOCOMOTIVE
+        
+        //LOCOMOTIVE
         $projectsData = array_merge($projectsData, $this->generateSeries(
             'Réparation de châssis locomotive',
             'Travaux sur le châssis d’une locomotive.',
@@ -119,13 +132,13 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             'moteur'
         ));
 
-        //  Création des entités
+        // Create and persist Project entities from data array
         foreach ($projectsData as $index => $data) {
             $category = $this->categoryRepository->findOneBy(['slug' => $data['categorySlug']]);
             $type = $this->typeRepository->findOneBy(['slug' => $data['typeSlug']]);
 
             if (!$category || !$type) {
-                throw new \Exception("Catégorie '{$data['categorySlug']}' ou type '{$data['typeSlug']}' introuvable.");
+                throw new \Exception("Category '{$data['categorySlug']}' or type '{$data['typeSlug']}' not found.");
             }
 
             $project = new Project();
@@ -146,8 +159,26 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function generateSeries(string $title, string $description, string $filenamePrefix, int $count, string $categorySlug, string $typeSlug): array
-    {
+    /**
+     * Generate a series of similar projects with indexed titles and filenames.
+     *
+     * @param string $title Base title of the project series.
+     * @param string $description Description applied to all generated projects.
+     * @param string $filenamePrefix Prefix used to generate picture filenames.
+     * @param int $count Number of projects to generate.
+     * @param string $categorySlug Slug identifying the project category.
+     * @param string $typeSlug Slug identifying the project type.
+     *
+     * @return array List of project data arrays.
+     */
+    private function generateSeries(
+        string $title,
+        string $description,
+        string $filenamePrefix,
+        int $count,
+        string $categorySlug,
+        string $typeSlug
+    ): array {
         $entries = [];
         for ($i = 1; $i <= $count; $i++) {
             $entries[] = [
@@ -161,6 +192,11 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         return $entries;
     }
 
+    /**
+     * Declare fixture dependencies to ensure categories and types exist before loading projects.
+     *
+     * @return array List of fixture classes this fixture depends on.
+     */
     public function getDependencies(): array
     {
         return [

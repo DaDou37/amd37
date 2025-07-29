@@ -7,6 +7,11 @@ use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Entity class representing a contact request submitted via a form.
+ *
+ * Includes validation constraints to ensure safe and consistent data handling.
+ */
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
@@ -15,48 +20,71 @@ class Contact
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * First name of the contact sender.
+     */
     #[ORM\Column(length: 100)]
-    #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
-    #[Assert\Length(max: 100, maxMessage: "Le prénom ne peut pas dépasser 100 caractères.")]
-    #[Assert\Regex(pattern: "/^[\p{L}\s'-]+$/u", message: "Le prénom ne doit contenir que des lettres.")]
+    #[Assert\NotBlank(message: "First name is required.")]
+    #[Assert\Length(max: 100, maxMessage: "First name cannot exceed 100 characters.")]
+    #[Assert\Regex(pattern: "/^[\p{L}\s'-]+$/u", message: "First name must contain only letters.")]
     private ?string $firstName = null;
 
+    /**
+     * Last name of the contact sender.
+     */
     #[ORM\Column(length: 100)]
-    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
-    #[Assert\Length(max: 100, maxMessage: "Le nom ne peut pas dépasser 100 caractères.")]
-    #[Assert\Regex(pattern: "/^[\p{L}\s'-]+$/u", message: "Le nom ne doit contenir que des lettres.")]
+    #[Assert\NotBlank(message: "Last name is required.")]
+    #[Assert\Length(max: 100, maxMessage: "Last name cannot exceed 100 characters.")]
+    #[Assert\Regex(pattern: "/^[\p{L}\s'-]+$/u", message: "Last name must contain only letters.")]
     private ?string $lastName = null;
 
+    /**
+     * Email address of the contact sender.
+     */
     #[ORM\Column(length: 180)]
-    #[Assert\NotBlank(message: "L'adresse email est obligatoire.")]
-    #[Assert\Email(message: "L'adresse email n'est pas valide.")]
+    #[Assert\NotBlank(message: "Email address is required.")]
+    #[Assert\Email(message: "Email address is not valid.")]
     private ?string $email = null;
 
+    /**
+     * Subject of the contact message.
+     */
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le sujet est obligatoire.")]
+    #[Assert\NotBlank(message: "Subject is required.")]
     #[Assert\Length(
         min: 5,
         max: 255,
-        minMessage: "Le sujet doit faire au moins {{ limit }} caractères.",
-        maxMessage: "Le sujet ne peut pas dépasser {{ limit }} caractères."
+        minMessage: "Subject must be at least {{ limit }} characters long.",
+        maxMessage: "Subject cannot exceed {{ limit }} characters."
     )]
     private ?string $subject = null;
 
+    /**
+     * Message content sent by the user.
+     */
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: "Le message est obligatoire.")]
+    #[Assert\NotBlank(message: "Message content is required.")]
     #[Assert\Length(
         max: 5000,
         min: 10,
-        minMessage: "Le message doit contenir au moins {{ limit }} caractères." //Cela empêche d’éventuelles attaques de type payload ou formulaire détourné
+        minMessage: "Message must contain at least {{ limit }} characters."
     )]
     private ?string $message = null;
 
+    /**
+     * Timestamp of when the contact message was created.
+     */
     #[ORM\Column]
-    #[Assert\NotNull(message: "La date de création ne peut pas être vide.")]
+    #[Assert\NotNull(message: "Creation date must not be null.")]
     private ?\DateTimeImmutable $createdAt = null;
 
+    /**
+     * Optional link to the user who submitted the contact form (if logged in).
+     */
     #[ORM\ManyToOne(inversedBy: 'contacts')]
     private ?User $user = null;
+
+    // --- Getters & Setters ---
 
     public function getId(): ?int
     {
@@ -71,7 +99,6 @@ class Contact
     public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
-
         return $this;
     }
 
@@ -83,7 +110,6 @@ class Contact
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
-
         return $this;
     }
 
@@ -94,8 +120,8 @@ class Contact
 
     public function setEmail(string $email): static
     {
-
-        $this->email = filter_var($email, \FILTER_SANITIZE_EMAIL); // verifie une 2eme fois si lemail est bien formaté
+        // Ensure email is sanitized before being stored
+        $this->email = filter_var($email, \FILTER_SANITIZE_EMAIL);
         return $this;
     }
 
@@ -107,7 +133,6 @@ class Contact
     public function setSubject(string $subject): static
     {
         $this->subject = $subject;
-
         return $this;
     }
 
@@ -119,7 +144,6 @@ class Contact
     public function setMessage(string $message): static
     {
         $this->message = $message;
-
         return $this;
     }
 
@@ -131,7 +155,6 @@ class Contact
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -143,13 +166,14 @@ class Contact
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 
+    /**
+     * Automatically set the creation date when the entity is instantiated.
+     */
     public function __construct()
     {
-
         $this->createdAt = new \DateTimeImmutable();
     }
 }
