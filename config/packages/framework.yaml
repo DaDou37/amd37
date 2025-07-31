@@ -3,7 +3,9 @@ framework:
     secret: '%env(APP_SECRET)%'
 
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    session:
+        cookie_lifetime: 900  # 15 minutes en secondes
+        gc_maxlifetime: 10800    # nettoyage PHP des sessions expirées (3h)
 
     #esi: true
     #fragments: true

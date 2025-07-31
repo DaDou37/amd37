@@ -30,26 +30,22 @@ class HomeController extends AbstractController
         ServiceRepository $serviceRepo,
     ): Response
     {
-        // Retrieve the 3 most recently updated online projects
-        $projects = $projectRepo->findBy(
-            ['isOnline' => true],
-            ['updatedAt' => 'DESC'],
-            3
-        );
+        // Récupérer tous les projets en ligne
+        $allOnlineProjects = $projectRepo->findBy(['isOnline' => true]);
 
-        // Retrieve all testimonials, ordered by creation date (newest first)
-        $testimonials = $testimonialRepository->findBy(
-            [],
-            ['createdAt' => 'DESC']
-        );
+        // Mélanger les projets aléatoirement
+        shuffle($allOnlineProjects);
 
-        // Retrieve all services ordered by position (for custom display order)
-        $services = $serviceRepo->findBy(
-            [],
-            ['position' => 'ASC']
-        );
+        // Prendre les 3 premiers
+        $projects = array_slice($allOnlineProjects, 0, 3);
 
-        // Render the homepage template with the fetched data
+        // Récupérer tous les témoignages, triés par date de création descendante
+        $testimonials = $testimonialRepository->findBy([], ['createdAt' => 'DESC']);
+
+        // Récupérer tous les services triés par position
+        $services = $serviceRepo->findBy([], ['position' => 'ASC']);
+
+        // Renvoyer la vue avec les données
         return $this->render('home/index.html.twig', [
             'projects' => $projects,
             'testimonials' => $testimonials,

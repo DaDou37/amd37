@@ -6,25 +6,25 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory:
-            memory:
-                users:
-                    admin:
-                        password: '$2y$13$2516YHa6ghtkvPJpLI5DF.n5s/y8xMXBvEwd34tiJMm8XUJMOFAtC'
-                        roles: ['ROLE_ADMIN']
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        admin:
-            pattern: ^/admin
-            http_basic: ~
-            provider: users_in_memory
-            logout:
-                path: /admin/logout
         main:
-            lazy: true
-            provider: users_in_memory
+            pattern: ^/
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true               # <-- active la protection CSRF
+                csrf_token_id: authenticate    # <-- identifiant du token CSRF
+                csrf_parameter: _csrf_token     # optionnel (par défaut _csrf_token)
+            logout:
+                path: app_logout
+                # On redirige après déconnexion
+                target: /
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
