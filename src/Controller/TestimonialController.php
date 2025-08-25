@@ -15,17 +15,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/avis')]
 final class TestimonialController extends AbstractController
 {
-    /**
-     * Displays the list of approved testimonials with pagination.
-     * Also handles the submission of the public testimonial form on the same page.
-     *
-     * @param TestimonialRepository $testimonialRepository The repository for testimonials.
-     * @param PaginatorInterface $paginator Paginator for paginating testimonials.
-     * @param Request $request HTTP request instance.
-     * @param EntityManagerInterface $entityManager Doctrine entity manager.
-     *
-     * @return Response Rendered testimonial list with form.
-     */
     #[Route(name: 'app_testimonial_index', methods: ['GET', 'POST'])]
     public function index(
         TestimonialRepository $testimonialRepository,
@@ -38,11 +27,14 @@ final class TestimonialController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Mark as not approved by default
+            // Récupérer le prénom depuis le formulaire
+            $firstName = $form->get('firstName')->getData();
+            // Concaténer prénom + nom dans author
+            $testimonial->setAuthor($firstName . ' ' . $testimonial->getAuthor());
+
             $testimonial->setIsApproved(false);
             $testimonial->setCreatedAt(new \DateTimeImmutable());
 
-            // Persist the new testimonial to database
             $entityManager->persist($testimonial);
             $entityManager->flush();
 
@@ -50,7 +42,7 @@ final class TestimonialController extends AbstractController
             return $this->redirectToRoute('app_testimonial_index');
         }
 
-        // Fetch only approved testimonials and paginate
+        // Récupérer uniquement les avis approuvés
         $query = $testimonialRepository->createQueryBuilder('t')
             ->where('t.isApproved = true')
             ->orderBy('t.createdAt', 'DESC')
@@ -68,14 +60,6 @@ final class TestimonialController extends AbstractController
         ]);
     }
 
-    /**
-     * Alternative route to allow public users to submit a testimonial via separate form page.
-     *
-     * @param Request $request HTTP request containing the form.
-     * @param EntityManagerInterface $em Doctrine entity manager.
-     *
-     * @return Response Rendered form page or redirection after submission.
-     */
     #[Route('/ajouter', name: 'app_testimonial_public_new', methods: ['GET', 'POST'])]
     public function publicNew(Request $request, EntityManagerInterface $em): Response
     {
@@ -84,6 +68,9 @@ final class TestimonialController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $firstName = $form->get('firstName')->getData();
+            $testimonial->setAuthor($firstName . ' ' . $testimonial->getAuthor());
+
             $testimonial->setIsApproved(false);
             $testimonial->setCreatedAt(new \DateTimeImmutable());
 

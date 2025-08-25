@@ -35,10 +35,10 @@ class TestimonialPublicFormType extends AbstractType
                 'label' => 'Nom',
                 'attr' => ['placeholder' => 'Entrez votre nom'],
             ])
-            ->add('email', EmailType::class, [
-                'required' => false,
-                'label' => 'Email',
-                'attr' => ['placeholder' => 'Entrez votre mail'],
+            ->add('firstName', TextType::class, [
+                'label' => 'Prénom',
+                'attr' => ['placeholder' => 'Entrez votre prénom'],
+                'required' => true,
             ])
             ->add('subject', ChoiceType::class, [
                 'label' => 'Services',

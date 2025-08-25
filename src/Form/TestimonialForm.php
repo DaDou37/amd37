@@ -36,8 +36,8 @@ class TestimonialForm extends AbstractType
             ->add('author', null, [
                 'label' => 'Nom',
             ])
-            ->add('email', null, [
-                'label' => 'Email',
+            ->add('firstName', null, [
+                'label' => 'Prénom',
             ])
             ->add('subject', null, [
                 'label' => 'Sujet',

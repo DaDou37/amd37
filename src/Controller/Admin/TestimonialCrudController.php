@@ -23,7 +23,7 @@ public function configureFields(string $pageName): iterable
     return [
         IdField::new('id')->onlyOnIndex(),
         TextField::new('author'),
-        TextField::new('email'),
+        TextField::new('firstName', 'Prénom'),
         TextField::new('subject'),
         TextEditorField::new('content'),
         BooleanField::new('isApproved', 'Approuvé ?'),

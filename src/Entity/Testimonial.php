@@ -55,12 +55,10 @@ class Testimonial
     #[ORM\Column(type: 'boolean')]
     private bool $isApproved = false;
 
-    /**
-     * Optional email address of the testimonial author.
-     */
-    #[ORM\Column(length: 180, nullable: true)]
-    #[Assert\Email(message: 'Adresse email invalide')]
-    private ?string $email = null;
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
+    #[Assert\Length(max: 100, maxMessage: 'Le prénom ne peut pas dépasser {{ limit }} caractères')]
+    private ?string $firstName = null; // Nouveau champ prénom
 
     /**
      * Optional subject or title of the testimonial.
@@ -137,16 +135,16 @@ class Testimonial
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getFirstName(): ?string 
     {
-        return $this->email;
+        return $this->firstName; 
     }
 
-    public function setEmail(?string $email): static
+    public function setFirstName(?string $firstName): static
     {
-        $this->email = $email;
-        return $this;
+        $this->firstName = $firstName; return $this; 
     }
+
 
     public function getSubject(): ?string
     {

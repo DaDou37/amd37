@@ -18,9 +18,9 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                enable_csrf: true               # <-- active la protection CSRF
-                csrf_token_id: authenticate    # <-- identifiant du token CSRF
-                csrf_parameter: _csrf_token     # optionnel (par défaut _csrf_token)
+                enable_csrf: true               
+                csrf_token_id: authenticate    
+                csrf_parameter: _csrf_token     
             logout:
                 path: app_logout
                 # On redirige après déconnexion

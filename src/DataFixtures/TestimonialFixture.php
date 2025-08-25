@@ -27,10 +27,17 @@ class TestimonialFixture extends Fixture
         // Generate 10 fake testimonials
         for ($i = 0; $i < 10; $i++) {
             $testimonial = new Testimonial();
-            $testimonial->setAuthor($faker->name());
+
+            // Générer un prénom et un nom séparément
+            $firstName = $faker->firstName();
+            $lastName = $faker->lastName();
+
+            $testimonial->setFirstName($firstName); // Prénom
+            $testimonial->setAuthor($lastName);     // Nom
+
             $testimonial->setContent($faker->paragraph());
 
-            // Set the creation date to a random time within the past 6 months
+            // Date aléatoire dans les 6 derniers mois
             $testimonial->setCreatedAt(
                 new \DateTimeImmutable(
                     $faker->dateTimeBetween('-6 months', 'now')->format('Y-m-d H:i:s')

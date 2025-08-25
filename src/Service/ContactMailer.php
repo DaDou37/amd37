@@ -2,22 +2,24 @@
 
 namespace App\Service;
 
-use App\Entity\Contact;
+use App\Dto\Contact;
+use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 
 /**
- * Service responsible for sending contact form emails.
- * Utilizes Symfony Mailer and Twig templates to format the email.
+ * Service responsible for sending contact emails.
+ * 
+ * This class leverages Symfony's Mailer component to send emails
+ * based on the data provided by the Contact Data Transfer Object (DTO).
  */
 class ContactMailer
 {
     /**
-     * Constructor to inject dependencies.
+     * Constructor.
      *
-     * @param MailerInterface $mailer Symfony Mailer service for sending emails
-     * @param string $toEmail Recipient email address, configured in service.yaml
+     * @param MailerInterface $mailer The mailer service used to send emails.
+     * @param string $toEmail The recipient email address (typically the admin or support email).
      */
     public function __construct(
         private MailerInterface $mailer,
@@ -25,24 +27,25 @@ class ContactMailer
     ) {}
 
     /**
-     * Sends an email based on the Contact entity data.
+     * Sends an email using the information provided by a Contact DTO.
      *
-     * @param Contact $contact The contact message entity containing sender data
+     * @param Contact $contact The contact data containing the sender's email, subject, and message.
+     *
+     * This method creates a TemplatedEmail, sets the sender, recipient, reply-to address,
+     * subject, and renders the email content using a Twig template.
      */
     public function send(Contact $contact): void
     {
-        // Create a new templated email using Twig template and contact info
         $email = (new TemplatedEmail())
-            ->from(new Address($contact->getEmail()))      // Sender email from contact form
-            ->to($this->toEmail)                            // Recipient email (site admin, for example)
-            ->replyTo($contact->getEmail())                 // Reply-to set to sender's email
-            ->subject($contact->getSubject())               // Email subject from contact form
-            ->htmlTemplate('emails/contact.html.twig')      // Twig template to format the email
+            ->from(new Address($contact->getEmail()))      // Sender's email address
+            ->to($this->toEmail)                           // Recipient's email address
+            ->replyTo($contact->getEmail())                // Reply-to address
+            ->subject($contact->getSubject())             // Email subject
+            ->htmlTemplate('emails/contact.html.twig')    // Twig template for email body
             ->context([
-                'contact' => $contact,                       // Pass the contact entity to the template
+                'contact' => $contact,                    // Passing the DTO to the template
             ]);
 
-        // Send the email via the injected mailer service
         $this->mailer->send($email);
     }
 }

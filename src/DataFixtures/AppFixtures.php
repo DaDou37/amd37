@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
         $admin->setCreatedAt(new \DateTimeImmutable());
 
         // Securely hash the password before storing
-        $hashedPassword = $this->hasher->hashPassword($admin, 'HugoDavid');
+        $hashedPassword = $this->hasher->hashPassword($admin, $_ENV['ADMIN_PASSWORD']);
         $admin->setPassword($hashedPassword);
 
         // Persist the user to the database

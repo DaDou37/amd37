@@ -3,27 +3,27 @@
 {% block title %}Avis
 {% endblock %}
 {% block javascripts %}
-{% if karser_recaptcha3_site_key is defined %}
-<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form[name="avis_form"]');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        
-        grecaptcha.ready(function () {
-            grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
-                const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
-                if (recaptchaInput) {
-                    recaptchaInput.value = token;
-                }
-                form.submit();  
-            });
-        });
-    });
+	{% if karser_recaptcha3_site_key is defined %}
+		<script src="https://www.google.com/recaptcha/api.js?render={{ karser_recaptcha3_site_key }}"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const form = document.querySelector('form[name="avis_form"]');
+form.addEventListener('submit', function (e) {
+e.preventDefault();
+
+grecaptcha.ready(function () {
+grecaptcha.execute('{{ karser_recaptcha3_site_key }}', {action: 'avis'}).then(function (token) {
+const recaptchaInput = document.querySelector('input[name="avis_form[captcha]"]');
+if (recaptchaInput) {
+recaptchaInput.value = token;
+}
+form.submit();
 });
-</script>
-{% endif %}
+});
+});
+});
+		</script>
+	{% endif %}
 
 {% endblock %}
 
@@ -65,7 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
 						<p class="testi_content">{{ testimonial.content }}</p>
 						<div class="testi-box_profile">
 							<div class="details">
-								<h4 class="testi-box_name">{{ testimonial.author }}</h4>
+								<h4 class="testi-box_name">
+									{{ testimonial.firstName ? testimonial.firstName ~ ' ' : '' }}{{ testimonial.author }}
+								</h4>
 								<span class="testi-box_desig">
 									{{ testimonial.createdAt ? testimonial.createdAt|date('d M Y') : '' }}
 								</span>
@@ -110,9 +112,10 @@ document.addEventListener('DOMContentLoaded', function() {
 								<i class="fal fa-user"></i>
 							</div>
 							<div class="form-group style-white2 col-md-6">
-								{{ form_row(form.email) }}
-								<i class="fal fa-envelope"></i>
+								{{ form_row(form.firstName) }}
+								<i class="fal fa-user"></i>
 							</div>
+
 							<div class="form-group col-md-6">
 								{{ form_row(form.subject) }}
 							</div>

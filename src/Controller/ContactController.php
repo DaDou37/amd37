@@ -2,63 +2,55 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
+use App\Dto\Contact;
 use App\Form\ContactForm;
 use App\Service\ContactMailer;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
- * Controller responsible for handling the contact form and sending emails.
+ * Controller responsible for handling contact form submissions.
+ * 
+ * This controller handles displaying the contact form, processing user input,
+ * and sending emails using the ContactMailer service.
  */
-#[Route('/contact')]
-final class ContactController extends AbstractController
+class ContactController extends AbstractController
 {
     /**
-     * Displays the contact form and handles its submission.
+     * Display and handle the contact form.
      *
-     * @param Request $request The HTTP request.
-     * @param EntityManagerInterface $entityManager Used to persist contact entries.
-     * @param ContactMailer $contactMailer Service responsible for sending the contact email.
-     * @param ParameterBagInterface $params Used to retrieve configuration parameters (e.g. reCAPTCHA key).
-     *
-     * @return Response The contact page with the form view.
+     * @param Request $request The current HTTP request.
+     * @param ContactMailer $contactMailer Service responsible for sending contact emails.
+     * 
+     * @return Response The HTTP response object, either rendering the form or redirecting after submission.
      */
-    #[Route(name: 'app_contact_index', methods: ['GET', 'POST'])]
-    public function index(
-        Request $request,
-        EntityManagerInterface $entityManager,
-        ContactMailer $contactMailer,
-        ParameterBagInterface $params
-    ): Response {
-        // Create a new Contact entity and bind it to the form (without user field)
+    #[Route('/contact', name: 'app_contact_index')]
+    public function contact(Request $request, ContactMailer $contactMailer): Response
+    {
+        // Create a new Contact DTO
         $contact = new Contact();
-        $form = $this->createForm(ContactForm::class, $contact, [
-            'include_user' => false,
-        ]);
+
+        // Build the contact form using the DTO
+        $form = $this->createForm(ContactForm::class, $contact);
         $form->handleRequest($request);
 
-        // If form is valid, persist the data and send an email
+        // Handle form submission
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($contact);
-            $entityManager->flush();
-
-            // Send the contact email using the custom mailer service
+            // Send the contact email
             $contactMailer->send($contact);
 
-            $this->addFlash('success', 'Votre message a bien été envoyé !');
+            // Add a flash message to indicate success
+            $this->addFlash('success', 'Votre message a été envoyé avec succès!');
+
+            // Redirect to the same page to avoid resubmission
             return $this->redirectToRoute('app_contact_index');
         }
 
-        // Render the contact form with reCAPTCHA configuration
+        // Render the contact form template
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
-            'karser_recaptcha3_site_key' => $params->get('recaptcha_site_key'),
-            'karser_recaptcha3_enabled' => true,
         ]);
     }
 }
